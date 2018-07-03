@@ -5,7 +5,7 @@ include_once 'dbfunctions.php';
  * 編集可能なユーザーか
  */
 function startSession(){
-	if(session_id()=="")return false;
+	if(session_id()!="")return false;
 	return session_start();
 }
 

@@ -18,4 +18,13 @@
 	<link rel="stylesheet" type="text/css" href="http://image02.seesaawiki.jp/l/o/looseryfun-game-info/overwrite.css" />
 	<script type="text/javascript" src=""></script>
 	<meta name="description" content="Loosery funデータベース" />
+<style type="text/css">  
+<!-- 
+	div#container
+	{
+		position: absolute;
+		top: 100px;
+	} 
+-->  
+</style>
 </head>
