@@ -9,8 +9,7 @@
 		$topPageMsg="ログインしました。";
 		include 'index.php';
 	}else{
-		$loginPageMsg="IDまたはパスワードが違います。";
-		$lastStatement->debugDumpParams();
+		$isError=true;;
 		include 'login.php';
 	}
 ?>

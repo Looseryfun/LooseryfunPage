@@ -2,9 +2,17 @@
 define('GRANT_GUEST', 0);
 define('GRANT_ADMIN', 1);
 define('GRANT_EDIT', 2);
+define('STATUS_WAIT', 0);
+define('STATUS_ACTIVE', 1);
+define('STATUS_DISABLE', 1);
+define('GETFROM_DROP', 0);
+define('GETFROM_SMITHSHOP', 1);
+define('GETFROM_QUEST', 2);
+define('GETFROM_LIMITED', 3);
 
-$pdo=null;;
-$lastStatement=null;;
+$pdo=null;
+$lastStatement=null;
+$lastSQL=null;
 /**
  * DB接続
  */
@@ -56,7 +64,8 @@ function getDBErrorString(){
  */
 function execSQL($sql,$params){
 	connectDB();
-	global $pdo,$lastStatement;
+	global $pdo,$lastStatement,$lastSQL;
+	$lastSQL = $sql.var_export($params,true);
 	$lastStatement = $pdo->prepare($sql);
 	if($lastStatement==false)return false;
 	if( !$lastStatement->execute($params) )return false;
@@ -80,7 +89,17 @@ function getSQLRecord($sql,$params){
 function getSQLRecords($sql,$params){
 	$stmt = execSQL($sql,$params);
 	if($stmt==false)return false;
-	return $stmt->fetchAll();
+	return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * 最後のINSERTのID取得
+ * @return
+ */
+function getInsertID($sql,$params){
+	global $pdo,$lastStatement;
+	connectDB();
+	return $pdo->lastInsertId();
 }
 
 /**
