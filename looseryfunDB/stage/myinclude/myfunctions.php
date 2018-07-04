@@ -18,6 +18,14 @@ function setSessionUser($user,$grant){
 }
 
 /**
+ * 権限削除
+ */
+function deleteSessionUser(){
+	unset($_SESSION['user']);
+	unset($_SESSION['grant']);
+}
+
+/**
  * 編集可能なユーザーか
  */
 function isEditUser(){
@@ -26,6 +34,14 @@ function isEditUser(){
 	if($grant==GRANT_ADMIN)return true;
 	if($grant==GRANT_EDIT)return true;
 	return false;
+}
+
+/**
+ * 管理者ユーザーか
+ */
+function isAdminUser(){
+	if(!isEditUser())return false;
+	return ($_SESSION['grant']==GRANT_ADMIN);
 }
 /**
  * ログイン中か
@@ -45,6 +61,13 @@ function getUserName(){
 function redirectPage($url){
 	header('Location: '.$url);
 	exit();
+}
+
+/**
+ * エスケープ
+ */
+function htmlEscape($string){
+	return htmlspecialchars($string);
 }
 
 startSession();

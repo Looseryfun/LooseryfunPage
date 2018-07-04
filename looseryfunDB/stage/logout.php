@@ -1,6 +1,6 @@
 ﻿<?php
 	include_once 'myinclude/pageheader.php';
-	$_SESSION=array();
+	deleteSessionUser();
 ?>
 	<div class="title-1"><h3>ログアウト ページ</h3></div>
 

@@ -7,7 +7,7 @@
 	<ul class="list-1" id="356283_block_2">
 		<li><a href="phpinfo.php">php情報</a></li>
 		<li><a href="http://looseryfun.s1006.xrea.com/log/phpmyadmin/index.php">データベース管理</a></li>
-		<li><a href="manageuser">ユーザー管理</a></li>
+		<li><a href="manageuser.php">ユーザー管理</a></li>
 	</ul>
 	
 <?php

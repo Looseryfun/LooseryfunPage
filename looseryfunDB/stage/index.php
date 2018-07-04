@@ -5,19 +5,18 @@
 	<div><?php if(isset($topPageMsg)){echo $topPageMsg;} ?></div>
 	<?php
 		echo "HELLO WORLD";
-		if (isLogin()) {
-			echo '<div><a href="kanri.php">管理ページへ</a></div>';
-		}
 	?>
 	<div>
+	<div class="title-1"><h3 id="content_2">管理機能</h3></div>
 	<?php
 		$loginName="ログイン";
 		$href="login.php";
 		if (isLogin()) {
     		$loginName="ログアウト";
 			$href="logout.php";
+			echo '<div><a href="kanri.php">管理ページへ</a></div>';
 		}
-		echo "<a href=\"$href\">$loginName</a>";
+		echo "<div><a href=\"$href\">$loginName</a></div>";
 	?>
 	</div>
 <?php
