@@ -56,7 +56,10 @@ function rollbackTransaction(){
 function getDBErrorString(){
 	global $pdo,$lastStatement;
 	if(!isset($lastStatement))return "";
-	return var_export($lastStatement->errorInfo(), true);
+	$errInfo = $lastStatement->errorInfo();
+	if(!isset($errInfo))return "";
+	if(!isset($errInfo[1])||$errInfo[1]==0)return "";
+	return implode(':',$errInfo);
 }
 
 /**
