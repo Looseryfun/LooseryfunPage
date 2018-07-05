@@ -66,9 +66,13 @@ class itemData{
  * アイテムマスタデータ
  */
 class ItemMaster{
+	public static function getJsonItemType(){
+		$result=ItemMaster::getItemTypeList();
+		return json_encode($result);
+	}
 	public static function getItemTypeList(){
 		$result=apcu_entry('itemTypeMasterData','ItemMaster::generateData',MASTER_CACHETIME);
-		return var_export($result,true);
+		return $result;
 	}
 	protected static function generateData($key){
 		$result=array();

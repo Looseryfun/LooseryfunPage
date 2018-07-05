@@ -18,6 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="http://image02.seesaawiki.jp/l/o/looseryfun-game-info/overwrite.css" />
 	<script type="text/javascript" src="http://static.seesaawiki.jp/js/jquery/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="http://static.seesaawiki.jp/js/usr/second/wikier.js"></script>
+	<script type="text/javascript" src="looseryfundb.js"></script>
 	<meta name="description" content="Loosery funデータベースサービス" />
 <style type="text/css">  
 <!-- 
