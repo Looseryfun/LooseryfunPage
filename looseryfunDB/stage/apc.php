@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 	ini_set('display_errors', 0);
 
 	include_once 'myinclude/myfunctions.php';
-	if(!isAdminUser()){
+	if(!isEditUser()){
 		include_once 'myinclude/pageheader.php';
 		echo '権限がありません<br/>';
 		include 'myinclude/pagefooter.php';

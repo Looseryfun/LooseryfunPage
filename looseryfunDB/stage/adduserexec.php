@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	include_once 'myinclude/pageheader.php';
 	if(!isAdminUser()){
 		echo '権限がありません<br/>';

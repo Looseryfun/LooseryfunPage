@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	include_once 'myinclude/pageheader.php';
 ?>
 	<div class="title-1"><h3>ログイン ページ</h3></div>

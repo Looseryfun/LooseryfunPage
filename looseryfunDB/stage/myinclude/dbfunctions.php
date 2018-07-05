@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 define('GRANT_GUEST', 0);
 define('GRANT_ADMIN', 1);
 define('GRANT_EDIT', 2);

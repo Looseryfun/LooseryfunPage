@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	include_once 'myinclude/myfunctions.php';
 	if(!isEditUser())redirectPage('index.php');
 	include_once 'myinclude/pageheader.php';

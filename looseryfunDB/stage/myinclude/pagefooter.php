@@ -1,4 +1,4 @@
-﻿
+
 <hr size="1" noshade="noshade">
 <div>
 	<a href="index.php">データベーストップに戻る</a><br/>

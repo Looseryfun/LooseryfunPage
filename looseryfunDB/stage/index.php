@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	include_once 'myinclude/pageheader.php';
 ?>
 	<div class="title-1"><h3 id="content_2">Loosery funデータベース</h3></div>

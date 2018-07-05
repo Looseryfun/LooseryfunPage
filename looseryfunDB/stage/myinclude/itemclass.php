@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 define('MASTER_CACHETIME', 30*60);
 include_once 'dbfunctions.php';
 

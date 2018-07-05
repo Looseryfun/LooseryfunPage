@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	include_once 'myinclude/pageheader.php';
 	include_once 'myinclude/itemclass.php';
 ?>

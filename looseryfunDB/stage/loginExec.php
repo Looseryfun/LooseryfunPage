@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	include_once 'myinclude/myfunctions.php';
 	//$grant = $_SESSION['grant'];
 	if(!isset($_POST['id'])||!isset($_POST['pass']))redirectPage('login.php');

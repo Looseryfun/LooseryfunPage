@@ -1,4 +1,6 @@
-﻿<?php
+<?php
+
+define('URL_CACHETIME',60*60);
 
 include_once 'dbfunctions.php';
 /**
@@ -69,6 +71,41 @@ function redirectPage($url){
 function htmlEscape($string){
 	return htmlspecialchars($string);
 }
+
+/**
+ * HTMLの一部取得
+ */
+function generateHtmlData($key){
+	$urlquery = explode('|',$key);
+	if(count($urlquery)!=2)return "";
+	$url = urldecode($urlquery[0]);
+	$query = urldecode($urlquery[1]);
+	
+	$domDocument = new DOMDocument();
+	@$domDocument->loadHTMLFile($url);
+	if(!$domDocument)return "";
+	$xpath = new DOMXPath($domDocument);
+	// 入れ物を探す
+	$nodes = $xpath->query($query);
+	foreach($nodes as $node) {
+	    // DOMツリーを保存
+	    $line = trim($domDocument->saveXML($node));
+	    if (! empty($line)) {
+	        $src[] = $line;
+	    }
+	}
+	return implode('',$src);
+}
+
+/**
+ * HTMLの一部取得
+ */
+function getHtmlData($url, $query){
+	$key = urlencode($url).'|'.urlencode($query);
+	return apcu_entry($key, 'generateHtmlData', URL_CACHETIME);
+}
+
+
 
 startSession();
 ?>
