@@ -3,7 +3,7 @@
 	include_once 'myinclude/itemclass.php';
 ?>
 <script type="text/javascript"> 
-var ItemTypeData = <?php echo ItemMaster::getJsonItemType(); ?>;
+var ItemTypeData = <?php echo json_encode(ItemMaster::getItemTypeList()); ?>;
 delete ItemTypeData[1];	// アイテムはまだ未対応
 window.addEventListener('DOMContentLoaded',function(){
 	setItemTypeList('mainItemType',ItemTypeData);

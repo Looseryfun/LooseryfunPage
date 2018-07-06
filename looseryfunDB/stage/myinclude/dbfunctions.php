@@ -96,6 +96,36 @@ function getSQLRecords($sql,$params){
 }
 
 /**
+ * data[id]=value or data[id]=array(values) の形にして取得
+ * @return fase or array
+ */
+function getSQLKeyValueRecords($sql,$params){
+	$stmt = execSQL($sql,$params);
+	if($stmt==false)return false;
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	if(count($result)<=0)return $result;
+	$primaryKey = array_keys($result[0])[0];
+	$returnValue = array();
+	$valuesCounts = count($result[0]);
+	foreach($result as $row){
+		$myKey = $row[$primaryKey];
+		unset($row[$primaryKey]);
+		switch($valuesCounts){
+			case 1:
+				$returnValue[$myKey]=null;
+				break;
+			case 2;
+				$returnValue[$myKey]=array_values($row)[0];
+				break;
+			default:
+				$returnValue[$myKey]=$row;
+				break;
+		}
+	}
+	return $returnValue;
+}
+
+/**
  * 最後のINSERTのID取得
  * @return
  */

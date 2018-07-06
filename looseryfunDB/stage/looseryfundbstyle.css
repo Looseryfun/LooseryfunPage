@@ -1,0 +1,20 @@
+﻿
+@charset "utf-8";
+
+table.itemedit {
+	padding-left: 10px;
+}
+
+.rightpos {
+    float: right;
+}
+
+
+input[type="number"]{
+	text-align:right;
+}
+
+input.submit{
+	position: relative;left: 300px;
+}
+

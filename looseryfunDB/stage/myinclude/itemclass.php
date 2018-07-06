@@ -66,15 +66,12 @@ class itemData{
  * アイテムマスタデータ
  */
 class ItemMaster{
-	public static function getJsonItemType(){
-		$result=ItemMaster::getItemTypeList();
-		return json_encode($result);
-	}
+	// アイテム種別
 	public static function getItemTypeList(){
-		$result=apcu_entry('itemTypeMasterData','ItemMaster::generateData',MASTER_CACHETIME);
+		$result=apcu_entry('itemTypeMasterData','ItemMaster::generateItemTypeData',MASTER_CACHETIME);
 		return $result;
 	}
-	protected static function generateData($key){
+	protected static function generateItemTypeData($key){
 		$result=array();
 		$mainrows = getSQLRecords("SELECT id, name FROM `mainitemtypes` order by id asc",array());
 		foreach($mainrows as $mainrow){
@@ -94,6 +91,39 @@ class ItemMaster{
 			$result[$id]=$newData;
 		}
 		return $result;
+	}
+	// プロパティ
+	public static function getItemPropertyList(){
+		$result=apcu_entry('itemPropertyMasterData','ItemMaster::generateItemPropertyData',MASTER_CACHETIME);
+		return $result;
+	}
+	protected static function generateItemPropertyData($key){
+		$result=array();
+		$mainrows = getSQLRecords("SELECT id, name FROM `mainproptype` order by id asc",array());
+		foreach($mainrows as $mainrow){
+			$newData = array('name'=>$mainrow['name']);
+			$newData['sub']=array();
+			$id = $mainrow['id'];
+			$subrows = getSQLRecords("SELECT subtype, percent, name FROM `subproptype` WHERE maintype=? order by showorder asc",array($id));
+			foreach($subrows as $subrow){
+				$subid = $subrow['subtype'].'_'.$subrow['percent'];
+				$subdata = array();
+				foreach($subrow as $key=>$value){
+					$subdata[$key]=$value;
+				}
+				$newData['sub'][$subid] = $subdata;
+			}
+			$result[$id]=$newData;
+		}
+		return $result;
+	}
+	// 取得方法
+	public static function getGetTypeList(){
+		$result=apcu_entry('itemGetTypeMasterData','ItemMaster::generateGetTypeData',MASTER_CACHETIME);
+		return $result;
+	}
+	protected static function generateGetTypeData($key){
+		return getSQLKeyValueRecords("SELECT id, name FROM `itemgettype` order by id asc",array());
 	}
 }
 ?>
