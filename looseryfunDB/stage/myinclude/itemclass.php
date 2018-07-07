@@ -6,9 +6,9 @@ include_once 'dbfunctions.php';
  * アイテムプロパティ
  */
 class ItemProperty{
-	public $id;
-	public $maintype;
-	public $subtype ;
+	public $id=0;
+	public $maintype=0;
+	public $subtype=0;
 	public $percent ;
 	public $proppower ;
 	public function set($itemid, $maintype,$subtype,$percent,$proppower){
@@ -49,17 +49,67 @@ class ItemProperty{
  */
 class itemData{
 	public $propertyList=array();
-	public $id;
-	public $maintype;
-	public $subtype;
-	public $status;
-	public $name;
-	public $gettype;
-	public $power;
-	public $stability;
-	public $limited;
-	public $help;
+	public $id=0;
+	public $maintype=0;
+	public $subtype=0;
+	public $breaktype=0;
+	public $breakpoint=0;
+	public $status=0;
+	public $name=null;
+	public $gettype=0;
+	public $power=0;
+	public $extra=null;
+	public $notrade=0;
+	public $stability=0;
+	public $limited=0;
+	public $help=0;
+	public $makedate=0;
 	//public $registdate;
+	protected static $inputValues=array(
+		'maintype',
+		'subtype',
+		'breaktype',
+		'breakpoint',
+		'status',
+		'name',
+		'gettype',
+		'power',
+		'extra',
+		'notrade',
+		'stability',
+		'limited',
+		'help',
+		'makedate',
+	);
+	public function __construct($newMaintype, $newName){
+		$this->name = $newName;
+		$this->maintype=$newMaintype;
+		$masterData=ItemMaster::getItemTypeList();
+		$maintypeName = $masterData[$this->maintype];
+		switch($maintypeName){
+			case '武器':case '体防具':
+				$this->notrade=0;
+				break;
+		}
+	}
+	public function save(){
+		if($this->id>0){
+			//TBD
+		}else{
+			saveInsert();
+		}
+	}
+	protected function saveInsert(){
+		$sql = 'INSERT INTO `itemrecords` (`maintype`, `subtype`, `breaktype`, `breakpoint`, `status`, `name`, `gettype`, `power`, `extra`, `notrade`, `stability`, `limited`, `help`, `makedate`)
+			VALUES (:maintype, :subtype, :breaktype, :breakpoint, :status, :name, :gettype, :power, :extra, :notrade, :stability, :limited, :help, :makedate)';
+		$params = array();
+		foreach($this->inputValues as $key){
+			$params[$key]=$this->$key;
+		}
+		execSQL($sql,$params);
+		$this->id = getInsertID();
+
+	}
 }
 
 /**

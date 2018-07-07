@@ -43,7 +43,6 @@ function onSubTypeChaned(event)
 	if(!imgid)return;
 	// 画像を更新
 	var target = document.getElementById(imgid);
-	console.log(target);
 	if(!target)return;
 	var imgpath = subTypeObj.masterData[subTypeObj.value]['img'];
 	target.src = imgpath;
@@ -126,3 +125,26 @@ function setSubPropertyTypeList(targetID, propertyMasterData)
 	return; 
 }
 
+
+// チェックボックスで有効無効切り替え
+function onEnableChaned(event)
+{
+	var checkBox = event.target;
+	var targetID = checkBox.getAttribute('target');
+	if(!targetID)return;
+	var target = document.getElementById(targetID);
+	if(!target)return;
+	
+	target.disabled = !checkBox.checked;
+	return; 
+}
+
+// チェックボックスで有効無効切り替え
+function setEnableCheckbox(targetID)
+{
+	var target = document.getElementById(targetID);
+	if(!target)return;
+	
+	target.addEventListener('change',onEnableChaned);
+	return; 
+}

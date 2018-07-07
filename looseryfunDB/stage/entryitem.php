@@ -47,6 +47,11 @@ window.addEventListener('DOMContentLoaded',function(){
 	setSelectboxData('dropType',getTypeData);
 });
 
+// 実装日
+window.addEventListener('DOMContentLoaded',function(){
+	setEnableCheckbox('usemakedate');
+});
+
 </script>
 	<div class="title-1"><h3>アイテム登録</h3></div>
 
@@ -72,7 +77,7 @@ window.addEventListener('DOMContentLoaded',function(){
 							<?php echoPropertyEditor(5); ?>
 							<?php echoPropertyEditor(6); ?>
 							<?php echoPropertyEditor(7); ?></td></tr>
-					<tr><td colspan="2">備考：<span class="rightpos"><input type="checkbox" name="usemakedate" value="1">実装日<input name="makedate" type="date" disabled="disabled"/></span><br/><textarea name="help" cols="40" rows="7" wrap="hard"></textarea></td></tr>
+					<tr><td colspan="2">備考：<span class="rightpos"><input type="checkbox" id="usemakedate" name="usemakedate" target="makedate" value="1">実装日<input id="makedate" name="makedate" type="date" disabled="disabled"/></span><br/><textarea name="help" cols="40" rows="7" wrap="hard"></textarea></td></tr>
 				</tbody></table>
 				<input type="button" onclick="submit();" class="submit" value="登録する" />
 				<!--<input type="submit" value="登録する" style="position: relative;left: 300px;"/>-->
