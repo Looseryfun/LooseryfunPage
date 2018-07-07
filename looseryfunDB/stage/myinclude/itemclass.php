@@ -125,5 +125,13 @@ class ItemMaster{
 	protected static function generateGetTypeData($key){
 		return getSQLKeyValueRecords("SELECT id, name FROM `itemgettype` order by id asc",array());
 	}
+	// 素材タイプ
+	public static function getMaterialTypeList(){
+		$result=apcu_entry('itemMaterialTypeMasterData','ItemMaster::generateMaterialTypeData',MASTER_CACHETIME);
+		return $result;
+	}
+	protected static function generateMaterialTypeData($key){
+		return getSQLKeyValueRecords("SELECT id, name FROM `materialtype` order by id asc",array());
+	}
 }
 ?>

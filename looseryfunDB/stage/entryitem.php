@@ -35,6 +35,18 @@ window.addEventListener('DOMContentLoaded',function(){
 	}
 });
 
+// 素材種別
+var materialTypeData = <?php echo json_encode(ItemMaster::getMaterialTypeList()); ?>;
+window.addEventListener('DOMContentLoaded',function(){
+	setSelectboxData('breakType',materialTypeData);
+});
+
+// 取得方法(ドロップ・鍛冶など)
+var getTypeData = <?php echo json_encode(ItemMaster::getGetTypeList()); ?>;
+window.addEventListener('DOMContentLoaded',function(){
+	setSelectboxData('dropType',getTypeData);
+});
+
 </script>
 	<div class="title-1"><h3>アイテム登録</h3></div>
 
@@ -48,6 +60,7 @@ window.addEventListener('DOMContentLoaded',function(){
 					<tr><th colspan="2"><?php echo htmlspecialchars($itemname); ?><input type="hidden" name="name" value="<?php echo htmlspecialchars($itemname); ?>"/></th></tr>
 					<tr><td><select id="subItemType" name="subtype" imgid="subimg"></select><img id="subimg" src=""/><input type="hidden" name="maintype" value="<?php echo htmlspecialchars($maintype); ?>"/></td>
 						<td><select id="dropType" name="gettype"></select>ドロップ種別</td></tr>
+					<tr><td></td><td>分解<select id="breakType" name="breaktype"></select><span class="rightpos"><input type="number" name="power" size="10" value="0"/>pt</span></td></tr>
 					<tr><td><input type="checkbox" name="notrade" value="1" checked="checked">トレード不可</input></td>
 						<td><input type="checkbox" name="limited" value="1">期間限定品</input></td></tr>
 					<tr><td>ATK:<input type="number" name="power" size="10" value="0"/></td><td>安定率:<input type="number" name="stability" size="10" value="50"/>%</td></tr>

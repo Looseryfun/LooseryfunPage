@@ -4,6 +4,24 @@ var useLooseryfunDBScript = 1;
 
 // 関数とか
 
+// セレクトリストにデータ設定
+function setSelectboxData(targetID, masterData)
+{
+	var target = document.getElementById(targetID);
+	if(!target)return false;
+	
+	target.innerHTML = "";	// option クリア
+	for (key in masterData) {
+		var name = masterData[key]['name'];
+		let op = document.createElement("option");
+		op.value = key;   //value
+		op.text = name;   //テキスト
+		target.appendChild(op);
+	}
+	target.masterData = masterData;
+	return true; 
+}
+
 // メインアイテムタイプ変更リスナー
 function onMainItemTypeChaned(event)
 {

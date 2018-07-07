@@ -114,9 +114,9 @@ function getSQLKeyValueRecords($sql,$params){
 			case 1:
 				$returnValue[$myKey]=null;
 				break;
-			case 2;
-				$returnValue[$myKey]=array_values($row)[0];
-				break;
+			//case 2;
+			//	$returnValue[$myKey]=array_values($row)[0];
+			//	break;
 			default:
 				$returnValue[$myKey]=$row;
 				break;
