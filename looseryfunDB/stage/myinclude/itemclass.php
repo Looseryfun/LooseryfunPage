@@ -84,7 +84,7 @@ class ItemMaster{
 				$subdata = array();
 				foreach($subrow as $key=>$value){
 					$subdata[$key]=$value;
-					if($key=='name'){$subdata['img']='img/'.$value.'.png';}
+					if($key=='name'){$subdata['img']='img/'.urlencode($value).'.png';}
 				}
 				$newData['sub'][$subid] = $subdata;
 			}

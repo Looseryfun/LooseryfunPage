@@ -8,7 +8,7 @@ var useLooseryfunDBScript = 1;
 function setSelectboxData(targetID, masterData)
 {
 	var target = document.getElementById(targetID);
-	if(!target)return false;
+	if(!target)return null;
 	
 	target.innerHTML = "";	// option クリア
 	for (key in masterData) {
@@ -19,7 +19,7 @@ function setSelectboxData(targetID, masterData)
 		target.appendChild(op);
 	}
 	target.masterData = masterData;
-	return true; 
+	return target; 
 }
 
 // メインアイテムタイプ変更リスナー
@@ -39,49 +39,34 @@ function onMainItemTypeChaned(event)
 function onSubTypeChaned(event)
 {
 	var subTypeObj = event.target;
-	if(!subTypeObj.imgid)return;
+	var imgid = subTypeObj.getAttribute('imgid');
+	if(!imgid)return;
 	// 画像を更新
-	var target = document.getElementById(subTypeObj.imgid);
+	var target = document.getElementById(imgid);
+	console.log(target);
 	if(!target)return;
-	var imgpath = target.masterData[target.value]['img'];
+	var imgpath = subTypeObj.masterData[subTypeObj.value]['img'];
+	target.src = imgpath;
 	return; 
 }
 
 // セレクトリストにメインアイテムタイプ設定
 function setItemTypeList(targetID, itemMasterData)
 {
-	var target = document.getElementById(targetID);
+	var target = setSelectboxData(targetID,itemMasterData);
 	if(!target)return;
 	
-	target.innerHTML = "";	// option クリア
-	for (key in itemMasterData) {
-		var name = itemMasterData[key]['name'];
-		let op = document.createElement("option");
-		op.value = key;   //value
-		op.text = name;   //テキスト
-		target.appendChild(op);
-	}
 	target.addEventListener('change',onMainItemTypeChaned);
-	target.masterData = itemMasterData;
 	return; 
 }
 
 // セレクトリストにサブアイテムタイプ設定
 function setSubItemTypeList(targetID, itemMasterData)
 {
-	var target = document.getElementById(targetID);
+	var target = setSelectboxData(targetID,itemMasterData);
 	if(!target)return;
 	
-	target.innerHTML = "";	// option クリア
-	for (key in itemMasterData) {
-		var name = itemMasterData[key]['name'];
-		let op = document.createElement("option");
-		op.value = key;   //value
-		op.text = name;   //テキスト
-		target.appendChild(op);
-	}
 	target.addEventListener('change',onSubTypeChaned);
-	target.masterData = itemMasterData;
 	return; 
 }
 
@@ -115,19 +100,10 @@ function onSubPropertyChaned(event)
 // セレクトリストにアイテム能力設定
 function setPropertyList(targetID, propertyMasterData)
 {
-	var target = document.getElementById(targetID);
+	var target = setSelectboxData(targetID,propertyMasterData);
 	if(!target)return;
 	
-	target.innerHTML = "";	// option クリア
-	for (key in propertyMasterData) {
-		var name = propertyMasterData[key]['name'];
-		let op = document.createElement("option");
-		op.value = key;   //value
-		op.text = name;   //テキスト
-		target.appendChild(op);
-	}
 	target.addEventListener('change',onMainPropertyChaned);
-	target.masterData = propertyMasterData;
 	return; 
 }
 
@@ -135,7 +111,7 @@ function setPropertyList(targetID, propertyMasterData)
 function setSubPropertyTypeList(targetID, propertyMasterData)
 {
 	var target = document.getElementById(targetID);
-	if(!target)return;
+	if(!target)return null;
 	
 	target.innerHTML = "";	// option クリア
 	for (key in propertyMasterData) {
@@ -145,8 +121,8 @@ function setSubPropertyTypeList(targetID, propertyMasterData)
 		op.text = name;   //テキスト
 		target.appendChild(op);
 	}
-	target.addEventListener('change',onSubPropertyChaned);
 	target.masterData = propertyMasterData;
+	target.addEventListener('change',onSubPropertyChaned);
 	return; 
 }
 
