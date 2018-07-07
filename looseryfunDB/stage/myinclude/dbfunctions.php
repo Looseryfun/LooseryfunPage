@@ -54,8 +54,9 @@ function rollbackTransaction(){
  * エラー文章取得
  */
 function getDBErrorString(){
-	global $pdo,$lastStatement;
+	global $pdo,$lastStatement,$lastSQL;
 	if(!isset($lastStatement))return "";
+	if($lastStatement===false)return "prepare error:".$lastSQL;
 	$errInfo = $lastStatement->errorInfo();
 	if(!isset($errInfo))return "";
 	if(!isset($errInfo[1])||$errInfo[1]==0)return "";
@@ -129,7 +130,7 @@ function getSQLKeyValueRecords($sql,$params){
  * 最後のINSERTのID取得
  * @return
  */
-function getInsertID($sql,$params){
+function getInsertID(){
 	global $pdo,$lastStatement;
 	connectDB();
 	return $pdo->lastInsertId();

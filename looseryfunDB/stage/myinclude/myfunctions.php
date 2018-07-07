@@ -2,7 +2,16 @@
 
 define('URL_CACHETIME',60*60);
 
+include_once 'itemclass.php';
 include_once 'dbfunctions.php';
+
+function isVariable(&$check){
+	if(!isset($check))return false;
+	if($check==null)return false;
+	if($check==0)return false;
+	return true;
+}
+
 /**
  * 編集可能なユーザーか
  */

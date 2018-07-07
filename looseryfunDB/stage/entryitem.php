@@ -14,7 +14,7 @@
 	$mainTypeData = ItemMaster::getItemTypeList()[$maintype];
 	
 function echoPropertyEditor($num){
-	echo "<div><select id=\"prop_maintype$num\" name=\"prop_maintype$num\" subid=\"prop_subtype$num\"></select><select id=\"prop_subtype$num\" name=\"prop_subtype$num\" percentid=\"prop_percent$num\"></select><span class=\"rightpos\">数値:<input type=\"number\" name=\"prop_power\" size=\"10\" value=\"0\"/><span id=\"prop_percent$num\" style=\"opacity:0;\">%</span></span></div>";
+	echo "<div><select id=\"prop_maintype$num\" name=\"prop_maintype$num\" subid=\"prop_subtype$num\"></select><select id=\"prop_subtype$num\" name=\"prop_subtype$num\" percentid=\"prop_percent$num\"></select><span class=\"rightpos\">数値:<input type=\"number\" name=\"prop_power$num\" size=\"10\" value=\"0\"/><span id=\"prop_percent$num\" style=\"opacity:0;\">%</span></span></div>";
 }
 ?>
 <script type="text/javascript"> 
@@ -59,13 +59,13 @@ window.addEventListener('DOMContentLoaded',function(){
 		<ul class="list-1">
 			<li><?php echo htmlspecialchars($itemname); ?>のデータを入力してください。</li>
 		</ul>
-		<form action="execentryitem.php" method="get">
+		<form action="execentryitem.php" method="post">
 			<div style="">
 				<table class="itemedit"><tbody>
 					<tr><th colspan="2"><?php echo htmlspecialchars($itemname); ?><input type="hidden" name="name" value="<?php echo htmlspecialchars($itemname); ?>"/></th></tr>
 					<tr><td><select id="subItemType" name="subtype" imgid="subimg"></select><span><img id="subimg" src="" class="tableicon"/></span><input type="hidden" name="maintype" value="<?php echo htmlspecialchars($maintype); ?>"/></td>
 						<td>入手元<select id="dropType" name="gettype"></select></td></tr>
-					<tr><td></td><td>分解<select id="breakType" name="breaktype"></select>:<span class="rightpos"><input type="number" name="power" size="10" value="0"/>pt</span></td></tr>
+					<tr><td></td><td>分解<select id="breakType" name="breaktype"></select>:<span class="rightpos"><input type="number" name="breakpoint" size="10" value="0"/>pt</span></td></tr>
 					<tr><td><input type="checkbox" name="notrade" value="1" checked="checked">トレード不可</input></td>
 						<td><input type="checkbox" name="limited" value="1">期間限定品</input></td></tr>
 					<tr><td>ATK:<input type="number" name="power" size="10" value="0"/></td><td>安定率:<input type="number" name="stability" size="10" value="50"/>%</td></tr>

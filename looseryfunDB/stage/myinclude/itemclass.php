@@ -6,13 +6,13 @@ include_once 'dbfunctions.php';
  * アイテムプロパティ
  */
 class ItemProperty{
-	public $id=0;
 	public $maintype=0;
 	public $subtype=0;
 	public $percent ;
 	public $proppower ;
-	public function set($itemid, $maintype,$subtype,$percent,$proppower){
-		$this->id=$itemid;
+	public function __construct(){
+	}
+	public function set($maintype,$subtype,$percent,$proppower){
 		$this->maintype=$maintype;
 		$this->subtype=$subtype;
 		$this->percent=$percent;
@@ -25,13 +25,13 @@ class ItemProperty{
 		}
 		return $result;
 	}
-	public function save($itemID=null){
+	public function save($itemID){
 		$params=get();
-		if(isset($itemID)){$params['ID']=$itemID;}
+		$params['id']=$itemID;
 		return execSQL("INSERT INTO `itempropertys` (`id`, `maintype`, `subtype`, `percent`, `proppower`) VALUES (:id, :maintype, :subtype, :percent, :proppower) ",$params);
 	}
 	public static function getPropertyList($itemID){
-		$rows = getSQLRecords("SELECT * FROM `itempropertys` WHERE id=:id",array('id'=>$itemID));
+		$rows = getSQLRecords("SELECT maintype,subtype,percent,proppower FROM `itempropertys` WHERE id=:id ORDER BY showorder ASC",array('id'=>$itemID));
 		$result = array();
 		foreach($rows as $row){
 			$prop = new ItemProperty();
@@ -70,7 +70,6 @@ class itemData{
 		'subtype',
 		'breaktype',
 		'breakpoint',
-		'status',
 		'name',
 		'gettype',
 		'power',
@@ -81,34 +80,84 @@ class itemData{
 		'help',
 		'makedate',
 	);
+	public static function getMaintypeName($maintype){
+		$masterData=ItemMaster::getItemTypeList();
+		if(!isset($masterData[$maintype]))return '';
+		return $masterData[$maintype];
+	}
 	public function __construct($newMaintype, $newName){
 		$this->name = $newName;
 		$this->maintype=$newMaintype;
-		$masterData=ItemMaster::getItemTypeList();
-		$maintypeName = $masterData[$this->maintype];
+		$maintypeName = itemData::getMaintypeName($this->maintype);
 		switch($maintypeName){
 			case '武器':case '体防具':
-				$this->notrade=0;
+				$this->notrade=1;
 				break;
 		}
 	}
-	public function save(){
+	/**
+	 * 同じ内容だったらIDパクる
+	 */
+	public function dupID($otherObject){
+		if(!$otherObject)return;
+		if($this->maintype!=$otherObject->maintype)return;
+		if($this->gettype!=$otherObject->gettype)return;
+		if($this->name!=$otherObject->name)return;
+		$this->id = $otherObject->id;
+	}
+	/**
+	 * DBに保存
+	 */
+	public function save($autoActive){
+		$result = false;
+		beginTransaction();
 		if($this->id>0){
-			//TBD
+			$result = $this->saveUpdate();
 		}else{
-			saveInsert();
+			$result = $this->saveInsert();
 		}
+		if($result){commitTransaction();}
+		else {rollbackTransaction();}
+		return $result;
 	}
 	protected function saveInsert(){
-		$sql = 'INSERT INTO `itemrecords` (`maintype`, `subtype`, `breaktype`, `breakpoint`, `status`, `name`, `gettype`, `power`, `extra`, `notrade`, `stability`, `limited`, `help`, `makedate`)
-			VALUES (:maintype, :subtype, :breaktype, :breakpoint, :status, :name, :gettype, :power, :extra, :notrade, :stability, :limited, :help, :makedate)';
+		$inputValues = itemData::$inputValues;
+		$colums = implode(',','`'.$inputValues.'`');
+		$values = ':'.implode(',:',$inputValues);
+		//$sql = 'INSERT INTO `itemrecords` (`maintype`, `subtype`, `breaktype`, `breakpoint`, `name`, `gettype`, `power`, `extra`, `notrade`, `stability`, `limited`, `help`, `makedate`)
+		//	VALUES (:maintype, :subtype, :breaktype, :breakpoint, :name, :gettype, :power, :extra, :notrade, :stability, :limited, :help, :makedate)';	
+		$sql = 'INSERT INTO `itemrecords` ('.$colums.') VALUES ('.$values.')';
 		$params = array();
-		foreach($this->inputValues as $key){
+		foreach($inputValues as $key){
 			$params[$key]=$this->$key;
 		}
-		execSQL($sql,$params);
+		if(!execSQL($sql,$params))return false;
 		$this->id = getInsertID();
-
+		return $this->propertyInsert();
+	}
+	protected function saveUpdate(){
+		$inputValues = itemData::$inputValues;
+		$updateValues = array();
+		foreach($inputValues as $key){
+			array_push($updateValues,'`'.$key.'`=:'.$key);
+		}
+		$sets = implode(',',$updateValues);
+		$sql = "UPDATE `itemrecords` SET $sets, registdate=now() WHERE `itemrecords`.`id` = :id ";
+		$params = array();
+		foreach($inputValues as $key){
+			$params[$key]=$this->$key;
+		}
+		$params['id']=$this->id;
+		if(!execSQL($sql,$params))return false;
+		return $this->propertyInsert();
+	}
+	protected function propertyInsert(){
+		if($this->id<=0)return false;
+		if(!execSQL('DELETE FROM `itempropertys` WHERE `itempropertys`.`id`= ?',array($this->id)))return false;
+		foreach($this->propertyList as $property){
+			if(!$property->save($this->id))return false;
+		}
+		return true;
 	}
 }
 
