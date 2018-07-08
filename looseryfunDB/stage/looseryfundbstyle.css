@@ -3,10 +3,42 @@
 
 table.itemedit {
 	padding-left: 10px;
+    width: 300px;
+}
+
+table.itemview {
+    padding-left: 10px;
+    width: 300px;
 }
 
 .rightpos {
     float: right;
+}
+
+.break span.icon {
+    background-image: url("img/batu.png");
+    background-size: 100% 100%;
+}
+
+span.icon img{
+	height: 20px;
+}
+
+.break span.helptext::before {
+    content: "×";
+}
+
+.nohelp span.helptext {
+    display: none;
+}
+
+.showhelp span.helptext {
+    display: inline;
+}
+
+.break img{
+    filter: sepia(50%);
+    opacity: 0.6;
 }
 
 
@@ -21,7 +53,6 @@ input.submit{
 
 img.tableicon{
 	height: 20px;
-	float: right;
 }
 
 

@@ -5,6 +5,15 @@ var useLooseryfunDBScript = 1;
 // 関数とか
 
 // セレクトリストにデータ設定
+function iconHElpText(imgIconObject)
+{
+	var target = imgIconObject.parentNode.parentNode;
+	$hasnohelp = target.className.indexOf('nohelp')>=0;
+	if($hasnohelp)target.className = target.className.replace('nohelp','showhelp');
+	else target.className = target.className.replace('showhelp','nohelp');
+}
+
+// セレクトリストにデータ設定
 function setSelectboxData(targetID, masterData)
 {
 	var target = document.getElementById(targetID);

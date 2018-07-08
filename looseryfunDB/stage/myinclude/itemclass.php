@@ -10,7 +10,18 @@ class ItemProperty{
 	public $subtype=0;
 	public $percent ;
 	public $proppower ;
+	protected static $inputValues=array(
+		'maintype',
+		'subtype',
+		'percent',
+		'proppower',
+	);
 	public function __construct(){
+	}
+	public function setFromArray($data){
+		foreach(ItemProperty::$inputValues as $key){
+			$this->$key = $data[$key];
+		}
 	}
 	public function set($maintype,$subtype,$percent,$proppower){
 		$this->maintype=$maintype;
@@ -159,12 +170,48 @@ class itemData{
 		}
 		return true;
 	}
+	/**
+	 * IDからデータ取得
+	 */
+	public static function getItemById($id){
+		$key = implode('_',array('item',$id));
+		$result=apcu_entry($key,'itemData::generateItemById',MASTER_CACHETIME);
+		return $result;
+	}
+	protected static function generateItemById($key){
+		$nameid = explode('_',$key);
+		$id = $nameid[1];
+		$record = getSQLRecord("SELECT * FROM `itemrecords` WHERE id=? ",array($id));
+		if($record==false)return null;
+		$result = new itemData($record['maintype'],$record['name']);
+		foreach(itemData::$inputValues as $key){
+			if($key=='makedate'){$result->$key = date('Y/m/d', strtotime($record[$key]));}
+			else {$result->$key = $record[$key];}
+		}
+		$proprecords = getSQLRecords("SELECT maintype,subtype,percent,proppower FROM `propertyorderview` WHERE id=? ",array($id));
+		if($proprecords!=false){
+			foreach($proprecords as $row){
+				$property = new ItemProperty();
+				$property->setFromArray($row);
+				array_push($result->propertyList,$property);
+			}
+		}
+		return $result;
+	}
 }
 
 /**
  * アイテムマスタデータ
  */
 class ItemMaster{
+	protected static function makeImgPath($rows){
+		foreach($rows as &$row){
+			foreach($row as $key=>$value){
+				if($key=='name'){$row['img']='img/'.urlencode($value).'.png';}
+			}
+		}
+		return $rows;
+	}
 	// アイテム種別
 	public static function getItemTypeList(){
 		$result=apcu_entry('itemTypeMasterData','ItemMaster::generateItemTypeData',MASTER_CACHETIME);
@@ -177,16 +224,9 @@ class ItemMaster{
 			$newData = array('name'=>$mainrow['name']);
 			$newData['sub']=array();
 			$id = $mainrow['id'];
-			$subrows = getSQLRecords("SELECT subtype, name FROM `subitemtype` WHERE maintype=? order by showorder asc",array($id));
-			foreach($subrows as $subrow){
-				$subid = $subrow['subtype'];
-				$subdata = array();
-				foreach($subrow as $key=>$value){
-					$subdata[$key]=$value;
-					if($key=='name'){$subdata['img']='img/'.urlencode($value).'.png';}
-				}
-				$newData['sub'][$subid] = $subdata;
-			}
+			$subrows = ItemMaster::makeImgPath(getSQLKeyValueRecords("SELECT subtype, name FROM `subitemtype` WHERE maintype=? order by showorder asc",array($id)));
+
+			$newData['sub'] = $subrows;
 			$result[$id]=$newData;
 		}
 		return $result;
@@ -218,19 +258,18 @@ class ItemMaster{
 	}
 	// 取得方法
 	public static function getGetTypeList(){
-		$result=apcu_entry('itemGetTypeMasterData','ItemMaster::generateGetTypeData',MASTER_CACHETIME);
-		return $result;
+		return apcu_entry('itemGetTypeMasterData','ItemMaster::generateGetTypeData',MASTER_CACHETIME);
 	}
 	protected static function generateGetTypeData($key){
-		return getSQLKeyValueRecords("SELECT id, name FROM `itemgettype` order by id asc",array());
+		return ItemMaster::makeImgPath(getSQLKeyValueRecords("SELECT id, name FROM `itemgettype` order by id asc",array()));
+
 	}
 	// 素材タイプ
 	public static function getMaterialTypeList(){
-		$result=apcu_entry('itemMaterialTypeMasterData','ItemMaster::generateMaterialTypeData',MASTER_CACHETIME);
-		return $result;
+		return apcu_entry('itemMaterialTypeMasterData','ItemMaster::generateMaterialTypeData',MASTER_CACHETIME);
 	}
 	protected static function generateMaterialTypeData($key){
-		return getSQLKeyValueRecords("SELECT id, name FROM `materialtype` order by id asc",array());
+		return ItemMaster::makeImgPath(getSQLKeyValueRecords("SELECT id, name FROM `materialtype` order by id asc",array()));
 	}
 }
 ?>
