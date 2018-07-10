@@ -157,3 +157,49 @@ function setEnableCheckbox(targetID)
 	target.addEventListener('change',onEnableChaned);
 	return; 
 }
+function triggerEvent(target, eventName) {
+	if (document.createEvent) {
+		var event = document.createEvent("HTMLEvents");
+		event.initEvent(eventName, true, true ); // event type, bubbling, cancelable
+		return target.dispatchEvent(event);
+	} else {
+		// IE
+		var event = document.createEventObject();
+		return element.fireEvent("on"+eventName, event)
+	}
+ }
+// フォームにデータを設定
+function setFormData(formName, data)
+{
+	var targetList = document.getElementsByName(formName);
+	var listSize = targetList.length;
+	for(var i=0;i<listSize;i++){
+		target = targetList.item(i);
+		target.value = data;
+		//target.trigger('change');
+		triggerEvent(target,'change');
+	}
+}
+
+// プロパティリストをフォームに設定
+function setPropertyListforForm(propertyList)
+{
+	if(!propertyList)return;
+	for(key in propertyList){
+		property = propertyList[key];
+		setFormData('prop_maintype'+key,property['maintype']);
+		setFormData('prop_subtype'+key,property['subtype']+'_'+property['prop_percent']);
+		//prop_percent //パーセントはサブタイプに吸収
+		setFormData('prop_power'+key,property['proppower']);
+	}
+}
+
+// アイテムデータをフォームに設定
+function setItemDataforForm(itemData)
+{
+	if(!itemData)return;
+	for(key in itemData){
+		if(key=='propertyList')setPropertyListforForm(itemData[key]);
+		else setFormData(key,itemData[key]);
+	}
+}

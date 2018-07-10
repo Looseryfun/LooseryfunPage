@@ -21,6 +21,18 @@ function startSession(){
 }
 
 /**
+ * 最後に登録したアイテム
+ */
+function getRegstItem(){
+	if(isset($_SESSION['registItemData']))return $_SESSION['registItemData'];
+	return null;
+}
+function setRegstItem($newItem){
+	$_SESSION['registItemData'] = newItem;
+	return null;
+}
+
+/**
  * 権限セット
  */
 function setSessionUser($user,$grant){

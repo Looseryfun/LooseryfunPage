@@ -1,9 +1,7 @@
 ﻿
-@charset "utf-8";
-
 table.itemedit {
 	padding-left: 10px;
-    width: 300px;
+    width: 400px;
 }
 
 table.itemview {

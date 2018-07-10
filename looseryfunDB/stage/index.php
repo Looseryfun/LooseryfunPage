@@ -1,13 +1,14 @@
 <?php
 	include_once 'myinclude/pageheader.php';
 ?>
-	<div class="title-1"><h3 id="content_2">Loosery funデータベース</h3></div>
+	<div class="title-1"><h3>Loosery funデータベース</h3></div>
 	<div><?php if(isset($topPageMsg)){echo $topPageMsg;} ?></div>
-	<?php
-		echo "HELLO WORLD";
-	?>
+	<div class="title-1"><h3>情報提供</h3></div>
+	<ul class="list-1">
+		<li><a href="entryitemtype.php">アイテム</a></li>
+	</ul>
 	<div>
-	<div class="title-1"><h3 id="content_2">管理機能</h3></div>
+	<div class="title-1"><h3>管理機能</h3></div>
 	<?php
 		$loginName="ログイン";
 		$href="login.php";

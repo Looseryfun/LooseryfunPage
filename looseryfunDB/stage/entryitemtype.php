@@ -4,9 +4,13 @@
 ?>
 <script type="text/javascript"> 
 var ItemTypeData = <?php echo json_encode(ItemMaster::getItemTypeList()); ?>;
-delete ItemTypeData[1];	// アイテムはまだ未対応
+//delete ItemTypeData[1]; //アイテムも指定可
 window.addEventListener('DOMContentLoaded',function(){
 	setItemTypeList('mainItemType',ItemTypeData);
+});
+var oldData = <?php echo json_encode(getRegstItem()); ?>;
+window.addEventListener('DOMContentLoaded',function(){
+	setItemDataforForm(oldData);
 });
 
 </script>

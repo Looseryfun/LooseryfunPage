@@ -74,7 +74,7 @@ class itemData{
 	public $stability=0;
 	public $limited=0;
 	public $help=0;
-	public $makedate=0;
+	public $makedate=null;
 	//public $registdate;
 	protected static $inputValues=array(
 		'maintype',
@@ -133,7 +133,7 @@ class itemData{
 	}
 	protected function saveInsert(){
 		$inputValues = itemData::$inputValues;
-		$colums = implode(',','`'.$inputValues.'`');
+		$colums = implode(',',$inputValues);
 		$values = ':'.implode(',:',$inputValues);
 		//$sql = 'INSERT INTO `itemrecords` (`maintype`, `subtype`, `breaktype`, `breakpoint`, `name`, `gettype`, `power`, `extra`, `notrade`, `stability`, `limited`, `help`, `makedate`)
 		//	VALUES (:maintype, :subtype, :breaktype, :breakpoint, :name, :gettype, :power, :extra, :notrade, :stability, :limited, :help, :makedate)';	
@@ -169,6 +169,18 @@ class itemData{
 			if(!$property->save($this->id))return false;
 		}
 		return true;
+	}
+	/**
+	 * メインタイプと名前一致するデータ取得
+	 */
+	public static function createMainytypeName($mainType,$name){
+		$record = getIDs("SELECT id FROM `itemrecords` WHERE maintype=? and name=? ",array($mainType,$name));
+		$result = array();
+		foreach($record as $id){
+			$data = itemData::getItemById($id);
+			if($data)array_push($result,$data);
+		}
+		return $result;
 	}
 	/**
 	 * IDからデータ取得

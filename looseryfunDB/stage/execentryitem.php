@@ -4,10 +4,12 @@
 	if(!isset($_REQUEST['maintype'])){
 		echo 'タイプが不正です。';
 		include 'myinclude/pagefooter.php';
+		exit();
 	}
 	if(!isset($_REQUEST['name'])||strlen($_REQUEST['name'])<=0){
 		echo 'アイテム名が入力されていません。';
 		include 'myinclude/pagefooter.php';
+		exit();
 	}
 
 function makeItemdataFromRequest($REQUEST){
@@ -40,13 +42,13 @@ function makeItemdataFromRequest($REQUEST){
 	return $result;
 }
 	$itemdata = makeItemdataFromRequest($_POST);
-	if(isset($_SESSION['registItemData'])){
-		$oldData = $_SESSION['registItemData'];
-		$itemdata->dupID($oldData);
+	$oldItem = getRegstItem();
+	if($oldItem){
+		$itemdata->dupID($oldItem);
 	}
 	$saveResult = $itemdata->save(false);
 	if($saveResult){
-		$_SESSION['registItemData'] = $itemdata;
+		setRegstItem($itemdata);
 	}
 	$mainTypeData = ItemMaster::getItemTypeList()[$itemdata->maintype];
 ?>

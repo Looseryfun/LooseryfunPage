@@ -77,6 +77,23 @@ function execSQL($sql,$params){
 }
 
 /**
+ * IDだけのレコード取得
+ * @return fase or array
+ */
+function getIDs($sql,$params){
+	$records = getSQLRecords($sql,$params);
+	if(!$records)return false;
+	$result = array();
+	foreach($records as $row){
+		foreach($row as $value){
+			array_push($result,$value);
+			break;// 最初の一つだけ
+		}
+	}
+	return $result;
+}
+
+/**
  * 一行だけのレコード取得
  * @return fase or array
  */
