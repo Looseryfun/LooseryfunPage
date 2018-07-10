@@ -21,7 +21,6 @@ window.addEventListener('DOMContentLoaded',function(){
 			<li>まずアイテムの種類と名前を入力してください。</li>
 			<li>種類が足りないなどの修正は<a class="outlink" href="http://looseryfun.game-info.wiki/d/%ca%d4%bd%b8%b0%cd%cd%ea" rel="nofollow">ぽよんと</a>までお願いします。</li>
 			<li>現在は装備品のみ対応しています。</li>
-			<li>まだ通常アイテム、敵情報などは未対応です。</li>
 		</ul>
 		<form action="entryitem.php" method="get">
 			<div style="">

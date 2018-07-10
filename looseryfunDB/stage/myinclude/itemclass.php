@@ -73,7 +73,7 @@ class itemData{
 	public $notrade=0;
 	public $stability=0;
 	public $limited=0;
-	public $help=0;
+	public $help='';
 	public $makedate=null;
 	//public $registdate;
 	protected static $inputValues=array(
@@ -176,6 +176,7 @@ class itemData{
 	public static function createMainytypeName($mainType,$name){
 		$record = getIDs("SELECT id FROM `itemrecords` WHERE maintype=? and name=? ",array($mainType,$name));
 		$result = array();
+		if(!$record)return $result;
 		foreach($record as $id){
 			$data = itemData::getItemById($id);
 			if($data)array_push($result,$data);

@@ -28,7 +28,7 @@ function getRegstItem(){
 	return null;
 }
 function setRegstItem($newItem){
-	$_SESSION['registItemData'] = newItem;
+	$_SESSION['registItemData'] = $newItem;
 	return null;
 }
 
