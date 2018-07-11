@@ -203,3 +203,16 @@ function setItemDataforForm(itemData)
 		else setFormData(key,itemData[key]);
 	}
 }
+
+//ボタンで表示変更
+function onChangeVisible(event)
+{
+	var source = event.target;
+	var targetID = source.getAttribute('target');
+	if(!targetID)return;
+	var target = document.getElementById(targetID);
+	if(!target)return;
+	
+	target.className = source.value;
+	return; 
+}
