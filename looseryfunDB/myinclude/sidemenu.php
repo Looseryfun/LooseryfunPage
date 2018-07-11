@@ -14,6 +14,17 @@
 <div class="wiki-section-body-1">
 <ul class="list-1">
 <li><a href="armorimage.php">体防具画像一覧</a></li>
+<li><a href="http://looseryfun.s1006.xrea.com/stage/equipimage.php?name=%E7%89%87%E6%89%8B%E5%89%A3">片手剣画像一覧</a></li>
+<li><a href="http://looseryfun.s1006.xrea.com/stage/equipimage.php?name=%E4%B8%A1%E6%89%8B%E5%89%A3">両手剣画像一覧</a></li>
+<li><a href="http://looseryfun.s1006.xrea.com/stage/equipimage.php?name=%E6%89%8B%E7%94%B2">手甲画像一覧</a></li>
+<li><a href="http://looseryfun.s1006.xrea.com/stage/equipimage.php?name=%E5%BC%93">弓画像一覧</a></li>
+<li><a href="http://looseryfun.s1006.xrea.com/stage/equipimage.php?name=%E8%87%AA%E5%8B%95%E5%BC%93">自動弓画像一覧</a></li>
+<li><a href="http://looseryfun.s1006.xrea.com/stage/equipimage.php?name=%E6%9D%96">杖画像一覧</a></li>
+<li><a href="http://looseryfun.s1006.xrea.com/stage/equipimage.php?name=%E9%AD%94%E5%B0%8E%E5%85%B7">魔導具画像一覧</a></li>
+<li><a href="http://looseryfun.s1006.xrea.com/stage/equipimage.php?name=%E6%97%8B%E9%A2%A8%E6%A7%8D">旋風槍画像一覧</a></li>
+<li><a href="http://looseryfun.s1006.xrea.com/stage/equipimage.php?name=%E6%8A%9C%E5%88%80%E5%89%A3">抜刀剣画像一覧</a></li>
+<li><a href="http://looseryfun.s1006.xrea.com/stage/equipimage.php?name=%E7%9B%BE">盾画像一覧</a></li>
+<li><a href="http://looseryfun.s1006.xrea.com/stage/equipimage.php?name=%E8%BF%BD%E5%8A%A0%E8%A3%85%E5%82%99">追加装備画像一覧</a></li>
 </ul>
 <div id="356283_block_3">
 <div class="toggle-title"><a class="toggle-link-open" id="region_plugin_DB_1" onclick="toggleRegion(this,'DB_block_1-inside');"><img width="17" height="17" alt="" src="http://static.seesaawiki.jp/formatter-storage/images/common/spacer.gif"></a><p>一覧</p></div>
