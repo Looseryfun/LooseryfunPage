@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	include_once 'htmlheader.php';
 ?>
 <body class="layout-2-r">

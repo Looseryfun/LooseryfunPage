@@ -1,0 +1,70 @@
+﻿/* 編集テーブル */
+table.itemedit {
+	padding-left: 10px;
+    width: 400px;
+}
+/* アイテム表示テーブル */
+table.itemview {
+    padding-left: 10px;
+    width: 300px;
+}
+/* 右に配置 */
+.rightpos {
+    float: right;
+}
+/* 男女表示 */
+div.showman img.man {
+    display:inline;
+}
+/* 男女表示 */
+div.showman img.woman {
+    display:none;
+}
+/* 男女表示 */
+div.showwoman img.man {
+    display:none;
+}
+/* 男女表示 */
+div.showwoman img.woman {
+    display:inline;
+}
+/* テーブルアイコン否定 */
+.break span.icon {
+    background-image: url("img/batu.png");
+    background-size: 100% 100%;
+}
+.break img{
+    filter: sepia(50%);
+    opacity: 0.6;
+}
+
+/* テーブルアイコン */
+span.icon img{
+	height: 20px;
+}
+img.tableicon{
+	height: 20px;
+}
+
+/* テーブルアイコン説明 */
+.break span.helptext::before {
+    content: "×";
+}
+.nohelp span.helptext {
+    display: none;
+}
+.showhelp span.helptext {
+    display: inline;
+}
+
+/* 一般 */
+input[type="number"]{
+	text-align:right;
+}
+
+input.submit{
+	position: relative;
+	left: 300px;
+}
+
+
