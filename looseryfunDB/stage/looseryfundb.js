@@ -216,3 +216,87 @@ function onChangeVisible(event)
 	target.className = source.value;
 	return; 
 }
+
+//skill_1_2の1取得
+function getSkillIdForTreeNumber(idName)
+{
+	if(!idName)return 0;
+	var array = idName.split('_');
+	if(array.length<2)return 0;
+	return Number(array[1]);
+}
+//skill_1_2の2取得
+function getSkillIdForSkillNumber(idName)
+{
+	if(!idName)return 0;
+	var array = idName.split('_');
+	if(array.length<3)return 0;
+	return Number(array[2]);
+}
+//スキルポイント統計
+function updateTotalSkillPoint(treeNumber)
+{
+	var skillMasterData = skillMaster;//from global
+	if(!skillMasterData)return;
+	var treeData = skillMasterData[treeNumber];
+	if(!treeData)return;
+
+	var totalPoint = 0;
+	for(var key in treeData['sub']){
+		var tergetID = 'skill_'+treeNumber+'_'+key;
+		var target = document.getElementById(tergetID);
+		if(!target)continue;
+		var skillpoint = Number(target.innerText);
+		totalPoint+=skillpoint;
+	}
+	var tergetID = 'skill_'+treeNumber+'_total';
+	var target = document.getElementById(tergetID);
+	if(!target)return;
+	target.innerText = totalPoint;
+}
+//スキルアップ連鎖
+function onUpRelative(source)
+{
+	var beforeID = source.getAttribute('before');
+	if(!beforeID)return;
+	var target = document.getElementById(beforeID);
+	if(!target)return;
+	var oldValue = Number(target.innerText);
+	if(oldValue>=5)return;
+	target.innerText = 5;
+	onUpRelative(target);
+}
+//スキルアップボタン
+function onUpSkill(self)
+{
+	var targetID = self.getAttribute('target');
+	if(!targetID)return;
+	var target = document.getElementById(targetID);
+	if(!target)return;
+	var oldValue = Number(target.innerText);
+	if(oldValue==0){
+		target.innerText = oldValue+1;
+		onUpRelative(target);
+	}else if(oldValue<10){
+		target.innerText = oldValue+1;
+	}
+	var treeNumber = getSkillIdForTreeNumber(targetID);
+	if(treeNumber>0)updateTotalSkillPoint(treeNumber);
+	return; 
+}
+
+//スキルダウンボタン
+function onDownSkill(self)
+{
+	var targetID = self.getAttribute('target');
+	if(!targetID)return;
+	var target = document.getElementById(targetID);
+	if(!target)return;
+	var oldValue = Number(target.innerText);
+	if(oldValue>0){
+		target.innerText = oldValue-1;
+	}
+	var treeNumber = getSkillIdForTreeNumber(targetID);
+	if(treeNumber>0)updateTotalSkillPoint(treeNumber);
+	return; 
+}

@@ -12,6 +12,7 @@
 	<div class="title-1"><h3>スキルエディター</h3></div>
 	<div>
 		<ul class="list-1">
+			<li>スキルアイコンをタップするとレベルアップ、downをタップすると下げることができます。</li>
 			<li>トラブルは<a class="outlink" href="http://looseryfun.game-info.wiki/d/%ca%d4%bd%b8%b0%cd%cd%ea" rel="nofollow">ぽよんと</a>までお願いします。</li>
 		</ul>
 	</div>

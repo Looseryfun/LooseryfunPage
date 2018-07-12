@@ -9,91 +9,92 @@ define('SKILL_LAYOUT_Y',50);
 define('SKILL_LINE_WIDTH',5*2);
 $skillMaster = SkillMaster::getSkillList();
 function echoSkill($treeid, $skillid, $skillData){
-if(!$skillData)return;
-$x = ($skillData['x']*SKILL_LAYOUT_X).'px';
-$y = ($skillData['y']*SKILL_LAYOUT_Y).'px';
-$name = htmlspecialchars($skillData['name']);
-$imgPath = $skillData['img'];
-$id='skill_'.$treeid.'_'.$skillid;
-$before='';
-if($skillData['before']>0){
-	$before='skill_'.$treeid.'_'.$skillData['before'];
-	$before='before="'.$before.'"';
-}
+	if(!$skillData)return;
+	$x = ($skillData['x']*SKILL_LAYOUT_X).'px';
+	$y = ($skillData['y']*SKILL_LAYOUT_Y).'px';
+	$name = htmlspecialchars($skillData['name']);
+	$imgPath = $skillData['img'];
+	$id='skill_'.$treeid.'_'.$skillid;
+	$before='';
+	if($skillData['before']>0){
+		$before='skill_'.$treeid.'_'.$skillData['before'];
+		$before='before="'.$before.'"';
+	}
 
-$style = "left: $x;top: $y;";
-echo "<div class=\"skillpanel\" id=\"skill$skillid\" style=\"$style\">";
-echo '<table class="clearbox">';
-echo "<tr><td rowspan=\"2\"><img class=\"skillicon\" target=\"$id\" src=\"$imgPath\" alt=\"$name\"></td>";
-echo '<td><span id="'.$id.'" '.$before.' class="skilllevel">'.'0'.'</span></td></tr>';
-echo '<tr><td>'.'<img class="downicon" target="'.$id.'" src="img/down.png" alt="下げる">'.'</td>';
-echo '</table>';
-echo '</div>';
+	$style = "left: $x;top: $y;";
+	echo "<div class=\"skillpanel\" id=\"skill$skillid\" style=\"$style\">";
+	echo '<table class="clearbox">';
+	echo "<tr><td rowspan=\"2\"><img class=\"skillicon\" onclick=\"onUpSkill(this)\" target=\"$id\" src=\"$imgPath\" alt=\"$name\"></td>";
+	echo '<td><span id="'.$id.'" '.$before.' class="skilllevel">'.'0'.'</span></td></tr>';
+	echo '<tr><td>'.'<img class="downicon" onclick="onDownSkill(this)" target="'.$id.'" src="img/down.png" alt="下げる">'.'</td>';
+	echo '</table>';
+	echo '</div>';
 }
 function echoBorderLine($base,$next){
-$left = min($base['x'],$next['x'])*SKILL_LAYOUT_X-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
-$right = max($base['x'],$next['x'])*SKILL_LAYOUT_X+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
-$top = min($base['y'],$next['y'])*SKILL_LAYOUT_Y-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
-$bottom = max($base['y'],$next['y'])*SKILL_LAYOUT_Y+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
+	$left = min($base['x'],$next['x'])*SKILL_LAYOUT_X-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
+	$right = max($base['x'],$next['x'])*SKILL_LAYOUT_X+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
+	$top = min($base['y'],$next['y'])*SKILL_LAYOUT_Y-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
+	$bottom = max($base['y'],$next['y'])*SKILL_LAYOUT_Y+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
 
-$style = 'left:'.$left.'px;top:'.$top.'px;width:'.($right-$left).'px;height:'.($bottom-$top).'px;';
-echo "<div class=\"skillborder\" style=\"$style\" >";
-echo '</div>';
-}
-function echoSubBorderLine($base,$next){
-$xpos = ($base['x']+$next['x'])*SKILL_LAYOUT_X/2;
-//$ypos = max($base['y'],$next['y'])*SKILL_LAYOUT_Y/2;
+	$style = 'left:'.$left.'px;top:'.$top.'px;width:'.($right-$left).'px;height:'.($bottom-$top).'px;';
+	echo "<div class=\"skillborder\" style=\"$style\" >";
+	echo '</div>';
+	}
+	function echoSubBorderLine($base,$next){
+	$xpos = ($base['x']+$next['x'])*SKILL_LAYOUT_X/2;
+	//$ypos = max($base['y'],$next['y'])*SKILL_LAYOUT_Y/2;
 
-$left = $xpos-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
-$right = $xpos+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
-$top = min($base['y'],$next['y'])*SKILL_LAYOUT_Y-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
-$bottom = max($base['y'],$next['y'])*SKILL_LAYOUT_Y+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
-$style = 'left:'.$left.'px;top:'.$top.'px;width:'.($right-$left).'px;height:'.($bottom-$top).'px;';
-echo "<div class=\"skillborder\" style=\"$style\" >";
-echo '</div>';
+	$left = $xpos-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
+	$right = $xpos+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
+	$top = min($base['y'],$next['y'])*SKILL_LAYOUT_Y-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
+	$bottom = max($base['y'],$next['y'])*SKILL_LAYOUT_Y+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
+	$style = 'left:'.$left.'px;top:'.$top.'px;width:'.($right-$left).'px;height:'.($bottom-$top).'px;';
+	echo "<div class=\"skillborder\" style=\"$style\" >";
+	echo '</div>';
 
-$left = $xpos-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
-$right = max($base['x'],$next['x'])*SKILL_LAYOUT_X+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
-$top = max($base['y'],$next['y'])*SKILL_LAYOUT_Y-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
-$bottom = max($base['y'],$next['y'])*SKILL_LAYOUT_Y+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
+	$left = $xpos-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
+	$right = max($base['x'],$next['x'])*SKILL_LAYOUT_X+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
+	$top = max($base['y'],$next['y'])*SKILL_LAYOUT_Y-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
+	$bottom = max($base['y'],$next['y'])*SKILL_LAYOUT_Y+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
 
-$style = 'left:'.$left.'px;top:'.$top.'px;width:'.($right-$left).'px;height:'.($bottom-$top).'px;';
-echo "<div class=\"skillborder\" style=\"$style\" >";
-echo '</div>';
+	$style = 'left:'.$left.'px;top:'.$top.'px;width:'.($right-$left).'px;height:'.($bottom-$top).'px;';
+	echo "<div class=\"skillborder\" style=\"$style\" >";
+	echo '</div>';
 }
 function echoBorderLines($skillData){
-foreach($skillData['sub'] as $key=>$value){
-	$before = $value['before'];
-	if($before<=0)continue;
+	foreach($skillData['sub'] as $key=>$value){
+		$before = $value['before'];
+		if($before<=0)continue;
 
-	$base = $skillData['sub'][$before];
-	$next = $value;
-	$dx = abs($base['x']-$next['x']);
-	$dy = abs($base['y']-$next['y']);
-	if($dx!=0&&$dy!=0){
-		echoSubBorderLine($base,$next);
-	}else{
-		echoBorderLine($base,$next);
+		$base = $skillData['sub'][$before];
+		$next = $value;
+		$dx = abs($base['x']-$next['x']);
+		$dy = abs($base['y']-$next['y']);
+		if($dx!=0&&$dy!=0){
+			echoSubBorderLine($base,$next);
+		}else{
+			echoBorderLine($base,$next);
+		}
 	}
 }
-}
 function echoSkillTree($skillid, $skillData){
-if(!$skillData)return;
-$maxy = 0;
-foreach($skillData['sub'] as $sub){
-	$maxy = max($sub['y'],$maxy);
-}
-$height = SKILL_LAYOUT_Y*($maxy+1).'px';
+	if(!$skillData)return;
+	$maxy = 0;
+	foreach($skillData['sub'] as $sub){
+		$maxy = max($sub['y'],$maxy);
+	}
+	$height = (SKILL_LAYOUT_Y*($maxy+1)+20).'px';
 
-echo '<div class="title-1"><h3>'.htmlspecialchars($skillData['name']).'</h3></div>';
-echo "<div class=\"skilltree\" id=\"tree$skillid\" style=\"height:$height;\">";
-echo '<div class="skillicons">';
-echoBorderLines($skillData);
-foreach($skillData['sub'] as $key=>$value){
-	echoSkill($skillid,$key,$value);
-}
-echo '</div>';
-echo '</div>';
+	echo '<div class="title-1"><h3>'.htmlspecialchars($skillData['name']).'</h3></div>';
+	echo "<div class=\"skilltree\" id=\"tree$skillid\" style=\"height:$height;\">";
+	echo '<div>使用スキルポイント：<span id="skill_'.$skillid.'_total">0</span>pt</div>';
+	echo '<div class="skillicons">';
+	echoBorderLines($skillData);
+	foreach($skillData['sub'] as $key=>$value){
+		echoSkill($skillid,$key,$value);
+	}
+	echo '</div>';
+	echo '</div>';
 }
 
 /**
