@@ -1,6 +1,6 @@
 <?php
 
-define('URL_CACHETIME',12*60*60);
+define('URL_CACHETIME',6*60*60);
 
 include_once 'itemclass.php';
 include_once 'dbfunctions.php';

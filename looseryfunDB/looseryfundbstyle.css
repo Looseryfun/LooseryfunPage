@@ -46,6 +46,14 @@ img.tableicon{
 	height: 20px;
 }
 
+/* スキル */
+div.skilltree {
+    position: relative;
+}
+div.skillpanel {
+    position: absolute;
+}
+
 /* テーブルアイコン説明 */
 .break span.helptext::before {
     content: "×";

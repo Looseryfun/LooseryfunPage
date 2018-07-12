@@ -46,6 +46,37 @@ img.tableicon{
 	height: 20px;
 }
 
+/* スキル */
+div.skilltree {
+    padding: 8px;
+    border-radius: 8px;
+    border: #ff6d09 solid;
+    border-width: 1px;
+    
+}
+/* スキル */
+div.skillicons {
+    position: relative;
+    
+}
+div.skillpanel {
+    position: absolute;
+    text-align: center;
+}
+div.skillpanel img.skillicon {
+    width: 40px;
+}
+div.skillpanel img.downicon {
+    height: 25px;
+}
+div.skillborder {
+    position: absolute;
+    background-color: rgba(255, 64, 64, 0.7);
+}
+div.skilltree table.clearbox {
+    margin: 0px;
+}
+
 /* テーブルアイコン説明 */
 .break span.helptext::before {
     content: "×";
