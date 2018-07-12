@@ -85,8 +85,13 @@ function echoSkillTree($skillid, $skillData){
 	}
 	$height = (SKILL_LAYOUT_Y*($maxy+1)+20).'px';
 
-	echo '<div class="title-1"><h3>'.htmlspecialchars($skillData['name']).'</h3></div>';
-	echo "<div class=\"skilltree\" id=\"tree$skillid\" style=\"height:$height;\">";
+	echo '<div class="title-1">';
+	echo '<h3>'.htmlspecialchars($skillData['name']);
+	echo '<span class="break"><span class="icon">';
+	echo '<img src="img/心眼.png" onclick="changeShowTarget(this)" target="tree'.$skillid.'"/>';
+	echo '</span></span>';
+	echo '</h3></div>';
+	echo "<div class=\"skilltree\" id=\"tree$skillid\" style=\"display:none;height:$height;\">";
 	echo '<div>使用スキルポイント：<span id="skill_'.$skillid.'_total">0</span>pt</div>';
 	echo '<div class="skillicons">';
 	echoBorderLines($skillData);

@@ -76,6 +76,9 @@ div.skillborder {
 div.skilltree table.clearbox {
     margin: 0px;
 }
+h3 span.icon img {
+    height: 27px;
+}
 
 /* テーブルアイコン説明 */
 .break span.helptext::before {
