@@ -55,17 +55,6 @@ window.addEventListener('DOMContentLoaded',function(){
 		target.addEventListener('change',onChangeVisible);
 	}
 });
-function changeshowimg(imgtag){
-	var spanTag = imgtag.parentNode.parentNode;
-	var target = spanTag.parentNode.parentNode.nextElementSibling ;
-	if(spanTag.className=='break'){
-		spanTag.className = '';
-		target.style.display="inline";
-	}else{
-		spanTag.className = 'break';
-		target.style.display="none";
-	}
-}
 </script>
 	<div class="title-1"><h3>体防具画像一覧</h3></div>
 	<div>
@@ -91,7 +80,7 @@ function changeshowimg(imgtag){
 <table style="display: inline-block;"><tbody>
 		<tr><th>
 			<a class="outlink" href="<?php echo $imgData['link']; ?>" rel="nofollow"><?php echo htmlspecialchars($imgData['name']); ?></a>
-			<span class=""><span class="rightpos icon"><img src="img/%e5%bf%83%e7%9c%bc.png" onclick="changeshowimg(this)"/></span></span>
+			<span class=""><span class="rightpos icon"><img src="img/%e5%bf%83%e7%9c%bc.png" onclick="changeShowImg(this)"/></span></span>
 		</th></tr>
 		<tr><td>
 <?php

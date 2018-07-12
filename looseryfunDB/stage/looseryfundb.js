@@ -168,6 +168,33 @@ function triggerEvent(target, eventName) {
 		return element.fireEvent("on"+eventName, event)
 	}
  }
+//表示非表示切り替えぼたむ
+function changeShowImg(imgtag){
+	var spanTag = imgtag.parentNode.parentNode;
+	var target = spanTag.parentNode.parentNode.nextElementSibling ;
+	if(spanTag.className=='break'){
+		spanTag.className = '';
+		target.style.display="inline";
+	}else{
+		spanTag.className = 'break';
+		target.style.display="none";
+	}
+}
+//表示非表示切り替えぼたむ
+function changeShowTarget(imgtag){
+	var spanTag = imgtag.parentNode;
+	var targetID = imgtag.getAttribute('target');
+	if(!targetID)return;
+	var target = document.getElementById(targetID);
+	if(!target)return;
+	if(spanTag.className=='break'){
+		spanTag.className = '';
+		target.style.display="inline";
+	}else{
+		spanTag.className = 'break';
+		target.style.display="none";
+	}
+}
 // フォームにデータを設定
 function setFormData(formName, data)
 {
