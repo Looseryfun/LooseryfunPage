@@ -15,6 +15,7 @@
 			<li>スキルアイコンをタップするとレベルアップ、downをタップすると下げることができます。</li>
 			<li>トラブルは<a class="outlink" href="http://looseryfun.game-info.wiki/d/%ca%d4%bd%b8%b0%cd%cd%ea" rel="nofollow">ぽよんと</a>までお願いします。</li>
 		</ul>
+		<div class="title-3"><h5>総使用ポイント：<span id="skill_all_total">0</span>pt</h5></div>
 	</div>
 	<div id="showarea">
 <?php

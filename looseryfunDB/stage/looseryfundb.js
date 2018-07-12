@@ -281,6 +281,23 @@ function updateTotalSkillPoint(treeNumber)
 	if(!target)return;
 	target.innerText = totalPoint;
 }
+//スキルポイント統計
+function updateAllTotalSkillPoint()
+{
+	var skillMasterData = skillMaster;//from global
+	if(!skillMasterData)return;
+	var allPoint = 0;
+	for(var treeNumber in skillMasterData){
+		var tergetID = 'skill_'+treeNumber+'_total';
+		var target = document.getElementById(tergetID);
+		if(!target)continue;
+		var skillpoint = Number(target.innerText);
+		allPoint += skillpoint;
+	}
+	var target = document.getElementById('skill_all_total');
+	if(!target)return;
+	target.innerText = allPoint;
+}
 //スキルアップ連鎖
 function onUpRelative(source)
 {
@@ -308,7 +325,10 @@ function onUpSkill(self)
 		target.innerText = oldValue+1;
 	}
 	var treeNumber = getSkillIdForTreeNumber(targetID);
-	if(treeNumber>0)updateTotalSkillPoint(treeNumber);
+	if(treeNumber>0){
+		updateTotalSkillPoint(treeNumber);
+		updateAllTotalSkillPoint();
+	}
 	return; 
 }
 
@@ -324,6 +344,9 @@ function onDownSkill(self)
 		target.innerText = oldValue-1;
 	}
 	var treeNumber = getSkillIdForTreeNumber(targetID);
-	if(treeNumber>0)updateTotalSkillPoint(treeNumber);
+	if(treeNumber>0){
+		updateTotalSkillPoint(treeNumber);
+		updateAllTotalSkillPoint();
+	}
 	return; 
 }
