@@ -71,17 +71,6 @@ function getEquipImg($url){
 	}
 ?>
 <script type="text/javascript"> 
-function changeshowimg(imgtag){
-	var spanTag = imgtag.parentNode.parentNode;
-	var target = spanTag.parentNode.parentNode.nextElementSibling ;
-	if(spanTag.className=='break'){
-		spanTag.className = '';
-		target.style.display="inline";
-	}else{
-		spanTag.className = 'break';
-		target.style.display="none";
-	}
-}
 </script>
 	<div class="title-1"><h3><?php echo htmlspecialchars($typename); ?>画像一覧</h3></div>
 	<div>
@@ -114,7 +103,7 @@ function changeshowimg(imgtag){
 <table style="display: table-cell;"><tbody>
 		<tr><th style="width:120px;font-size:<?php echo $fontSize; ?>;">
 			<a class="outlink" href="<?php echo $imgData['link']; ?>" rel="nofollow"><?php echo htmlspecialchars($imgData['name']); ?></a>
-			<span class=""><span class="rightpos icon"><img src="img/%e5%bf%83%e7%9c%bc.png" onclick="changeshowimg(this)"/></span></span>
+			<span class=""><span class="rightpos icon"><img src="img/%e5%bf%83%e7%9c%bc.png" onclick="changeShowImg(this)"/></span></span>
 		</th></tr>
 		<tr><td style="text-align: center;">
 <?php

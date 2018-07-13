@@ -1,9 +1,29 @@
 <?php
 
-define('URL_CACHETIME',12*60*60);
+define('URL_CACHETIME',6*60*60);
+define('SHORT_NUMBER_STRING',"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 include_once 'itemclass.php';
 include_once 'dbfunctions.php';
+
+function fromShortNumber($char){
+	return strpos(SHORT_NUMBER_STRING,$char);
+}
+function toSkillValues($string){
+	$result = array();
+	$len = strlen($string);
+	for($i=0;$i<$len;$i++){
+		$treeID = fromShortNumber($string[$i]);
+		$result[$treeID]=array();
+		for($i=$i+1;$i<$len;$i++){
+			$skillID = fromShortNumber($string[$i]);
+			if($skillID<=0)break;
+			$skillLevel = fromShortNumber($string[++$i]);
+			$result[$treeID][$skillID]=$skillLevel;
+		}
+	}
+	return $result;
+}
 
 function isVariable(&$check){
 	if(!isset($check))return false;
