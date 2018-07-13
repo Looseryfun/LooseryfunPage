@@ -31,6 +31,14 @@
 		}
 		setInterval(updateLinks,500,links,skillMaster,'mylevel');
 	});
+	var t = 0;
+	document.documentElement.addEventListener('touchend', function (e) {
+		var now = new Date().getTime();
+		if ((now - t) < 300){
+			e.preventDefault();
+		}
+		t = now;
+	}, false);
 </script>
 	<div class="title-1"><h3>スキルエディター</h3></div>
 	<div>
