@@ -350,3 +350,25 @@ function onDownSkill(self)
 	}
 	return; 
 }
+
+//ユーザーレベル情報を更新
+function updateUserLevel(userlevel, skillMasterData)
+{
+	userlevel = Number(userlevel);
+	if(userlevel<=0)return;
+
+	for(maintype in skillMasterData){
+		var targetID = 'tree'+String(maintype);
+		var target = document.getElementById(targetID);
+		if(!target)continue;
+		var levels="";
+		var levelDatas = skillMasterData[maintype]['level'];
+		for(level in levelDatas){
+			if(userlevel>=Number(levelDatas[level]['need'])){
+				levels += String(level);
+			}
+		}
+		target.setAttribute('treelevels',levels);
+	}
+	return;
+}

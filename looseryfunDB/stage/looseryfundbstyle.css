@@ -73,11 +73,43 @@ div.skillborder {
     position: absolute;
     background-color: rgba(255, 64, 64, 0.7);
 }
-div.skilltree table.clearbox {
+div.skillicons table.clearbox {
     margin: 0px;
 }
 h3 span.icon img {
     height: 27px;
+}
+div.skilltree:not([treelevels*="1"]) div.skillicons table td[treelevel="1"] {
+    background-image: url("img/batu.png");
+    background-size: 100% 100%;
+}
+div.skilltree:not([treelevels*="1"]) div.skillicons table td[treelevel="1"] img.skillicon{
+    filter: sepia(50%);
+    opacity: 0.6;
+}
+div.skilltree:not([treelevels*="2"]) div.skillicons table td[treelevel="2"] {
+    background-image: url("img/batu.png");
+    background-size: 100% 100%;
+}
+div.skilltree:not([treelevels*="2"]) div.skillicons table td[treelevel="2"] img.skillicon{
+    filter: sepia(50%);
+    opacity: 0.6;
+}
+div.skilltree:not([treelevels*="3"]) div.skillicons table td[treelevel="3"] {
+    background-image: url("img/batu.png");
+    background-size: 100% 100%;
+}
+div.skilltree:not([treelevels*="3"]) div.skillicons table td[treelevel="3"] img.skillicon{
+    filter: sepia(50%);
+    opacity: 0.6;
+}
+div.skilltree:not([treelevels*="4"]) div.skillicons table td[treelevel="4"] {
+    background-image: url("img/batu.png");
+    background-size: 100% 100%;
+}
+div.skilltree:not([treelevels*="4"]) div.skillicons table td[treelevel="4"] img.skillicon{
+    filter: sepia(50%);
+    opacity: 0.6;
 }
 
 /* テーブルアイコン説明 */

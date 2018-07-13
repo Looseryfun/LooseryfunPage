@@ -13,6 +13,7 @@ function echoSkill($treeid, $skillid, $skillData){
 	$x = ($skillData['x']*SKILL_LAYOUT_X).'px';
 	$y = ($skillData['y']*SKILL_LAYOUT_Y).'px';
 	$name = htmlspecialchars($skillData['name']);
+	$treelevel = $skillData['level'];
 	$imgPath = $skillData['img'];
 	$id='skill_'.$treeid.'_'.$skillid;
 	$before='';
@@ -24,7 +25,7 @@ function echoSkill($treeid, $skillid, $skillData){
 	$style = "left: $x;top: $y;";
 	echo "<div class=\"skillpanel\" id=\"skill$skillid\" style=\"$style\">";
 	echo '<table class="clearbox">';
-	echo "<tr><td rowspan=\"2\"><img class=\"skillicon\" onclick=\"onUpSkill(this)\" target=\"$id\" src=\"$imgPath\" alt=\"$name\"></td>";
+	echo "<tr><td rowspan=\"2\" treelevel=\"$treelevel\"><img class=\"skillicon\" onclick=\"onUpSkill(this)\" target=\"$id\" src=\"$imgPath\" alt=\"$name\"></td>";
 	echo '<td><span id="'.$id.'" '.$before.' class="skilllevel">'.'0'.'</span></td></tr>';
 	echo '<tr><td>'.'<img class="downicon" onclick="onDownSkill(this)" target="'.$id.'" src="img/down.png" alt="下げる">'.'</td>';
 	echo '</table>';
@@ -91,7 +92,7 @@ function echoSkillTree($skillid, $skillData){
 	echo '<img src="img/心眼.png" onclick="changeShowTarget(this)" target="tree'.$skillid.'"/>';
 	echo '</span></span>';
 	echo '</h3></div>';
-	echo "<div class=\"skilltree\" id=\"tree$skillid\" style=\"display:none;height:$height;\">";
+	echo "<div class=\"skilltree\" treelevels=\"1\" id=\"tree$skillid\" style=\"display:none;height:$height;\">";
 	echo '<div>使用スキルポイント：<span id="skill_'.$skillid.'_total">0</span>pt</div>';
 	echo '<div class="skillicons">';
 	echoBorderLines($skillData);
@@ -126,8 +127,9 @@ class SkillMaster{
 			$subrows = SkillMaster::makeImgPath(
 				getSQLKeyValueRecords("SELECT subtype, name, level, `before`, `x`, `y` FROM `skilldata` WHERE maintype=? order by subtype asc",array($mainkey))
 			);
-
 			$newData['sub'] = $subrows;
+			$levelrows = getSQLKeyValueRecords("SELECT level, need FROM `skilltreelevels` WHERE maintype=? order by level asc",array($mainkey));
+			$newData['level'] = $levelrows;
 		}
 		return $result;
 	}
