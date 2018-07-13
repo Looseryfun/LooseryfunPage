@@ -7,7 +7,6 @@ define('SKILL_ICON_Y',20);
 define('SKILL_LAYOUT_X',100);
 define('SKILL_LAYOUT_Y',50);
 define('SKILL_LINE_WIDTH',5*2);
-$skillMaster = SkillMaster::getSkillList();
 function echoSkill($treeid, $skillid, $skillData, $skillMasterDataName){
 	if(!$skillData)return;
 	$x = ($skillData['x']*SKILL_LAYOUT_X).'px';
