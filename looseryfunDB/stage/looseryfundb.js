@@ -304,8 +304,18 @@ function onUpRelative(source)
 	if(!target)return;
 	var oldValue = Number(target.innerText);
 	if(oldValue>=5)return;
-	target.innerText = 5;
+	setSkillLevel(target,5);
 	onUpRelative(target);
+}
+//スキルの数値設定
+function setSkillLevel(target,levelCount)
+{
+	target.innerText = levelCount;
+	while(target!=null&&target.tagName.toLowerCase()!='table'){
+		target = target.parentNode;
+	}
+	if(!target)return;
+	target.setAttribute('power',levelCount);
 }
 //スキルアップボタン
 function onUpSkill(event,skillMasterData)
@@ -316,10 +326,10 @@ function onUpSkill(event,skillMasterData)
 	if(!target)return;
 	var oldValue = Number(target.innerText);
 	if(oldValue==0){
-		target.innerText = oldValue+1;
+		setSkillLevel(target,oldValue+1);
 		onUpRelative(target);
 	}else if(oldValue<10){
-		target.innerText = oldValue+1;
+		setSkillLevel(target,oldValue+1);
 	}
 	var treeNumber = getSkillIdForTreeNumber(targetID);
 	if(treeNumber>0){
@@ -339,7 +349,7 @@ function onDownSkill(event)
 	if(!target)return;
 	var oldValue = Number(target.innerText);
 	if(oldValue>0){
-		target.innerText = oldValue-1;
+		setSkillLevel(target,oldValue-1);
 	}
 	var treeNumber = getSkillIdForTreeNumber(targetID);
 	if(treeNumber>0){
@@ -393,7 +403,7 @@ function setAllSkillValues(skillValues, skillMasterData)
 			var skilllevelID = "skill_"+String(treeid)+"_"+String(skillid);
 			var skilllevelTag = document.getElementById(skilllevelID);
 			if(!skilllevelTag)continue;
-			skilllevelTag.innerText = level;
+			setSkillLevel(skilllevelTag,level);
 		}
 		updateTotalSkillPoint(treeid,skillMasterData);
 		var targetID = "treeshow_"+String(treeid);
