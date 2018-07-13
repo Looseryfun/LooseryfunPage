@@ -88,8 +88,8 @@ function echoSkillTree($skillid, $skillData,$skillMasterDataName){
 
 	echo '<div class="title-1">';
 	echo '<h3>'.htmlspecialchars($skillData['name']);
-	echo '<span class="break"><span class="icon">';
-	echo '<img src="img/心眼.png" onclick="changeShowTarget(this)" target="tree'.$skillid.'"/>';
+	echo '<span class="break" id="treeshow_'.$skillid.'" target="tree'.$skillid.'"><span class="icon">';
+	echo '<img src="img/心眼.png" onclick="changeShowTarget(this.parentNode.parentNode)"/>';
 	echo '</span></span>';
 	echo '</h3></div>';
 	echo "<div class=\"skilltree\" treelevels=\"1\" id=\"tree$skillid\" style=\"display:none;height:$height;\">";
