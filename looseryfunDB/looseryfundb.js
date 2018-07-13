@@ -308,9 +308,9 @@ function onUpRelative(source)
 	onUpRelative(target);
 }
 //スキルアップボタン
-function onUpSkill(self,skillMasterData)
+function onUpSkill(event,skillMasterData)
 {
-	var targetID = self.getAttribute('target');
+	var targetID = event.target.getAttribute('target');
 	if(!targetID)return;
 	var target = document.getElementById(targetID);
 	if(!target)return;
@@ -331,9 +331,9 @@ function onUpSkill(self,skillMasterData)
 }
 
 //スキルダウンボタン
-function onDownSkill(self)
+function onDownSkill(event)
 {
-	var targetID = self.getAttribute('target');
+	var targetID = event.target.getAttribute('target');
 	if(!targetID)return;
 	var target = document.getElementById(targetID);
 	if(!target)return;

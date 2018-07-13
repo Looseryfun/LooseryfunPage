@@ -7,7 +7,6 @@ define('SKILL_ICON_Y',20);
 define('SKILL_LAYOUT_X',100);
 define('SKILL_LAYOUT_Y',50);
 define('SKILL_LINE_WIDTH',5*2);
-$skillMaster = SkillMaster::getSkillList();
 function echoSkill($treeid, $skillid, $skillData, $skillMasterDataName){
 	if(!$skillData)return;
 	$x = ($skillData['x']*SKILL_LAYOUT_X).'px';
@@ -25,9 +24,9 @@ function echoSkill($treeid, $skillid, $skillData, $skillMasterDataName){
 	$style = "left: $x;top: $y;";
 	echo "<div class=\"skillpanel\" id=\"skill$skillid\" style=\"$style\">";
 	echo '<table class="clearbox">';
-	echo "<tr><td rowspan=\"2\" treelevel=\"$treelevel\"><img class=\"skillicon\" onclick=\"onUpSkill(this,$skillMasterDataName)\" target=\"$id\" src=\"$imgPath\" alt=\"$name\"></td>";
+	echo "<tr><td rowspan=\"2\" treelevel=\"$treelevel\"><img class=\"skillicon\" onclick=\"onUpSkill(arguments[0],$skillMasterDataName)\" target=\"$id\" src=\"$imgPath\" alt=\"$name\"></td>";
 	echo '<td><span id="'.$id.'" '.$before.' class="skilllevel">'.'0'.'</span></td></tr>';
-	echo '<tr><td>'.'<img class="downicon" onclick="onDownSkill(this,'.$skillMasterDataName.')" target="'.$id.'" src="img/down.png" alt="下げる">'.'</td>';
+	echo '<tr><td>'.'<img class="downicon" onclick="onDownSkill(arguments[0],'.$skillMasterDataName.')" target="'.$id.'" src="img/down.png" alt="下げる">'.'</td>';
 	echo '</table>';
 	echo '</div>';
 }
