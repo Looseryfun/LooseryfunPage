@@ -403,6 +403,15 @@ function setAllSkillValues(skillValues, skillMasterData)
 	updateAllTotalSkillPoint(skillMasterData);
 }
 //GETパラメータ用の文字列取得
+function makeAllSkillParam(skillMasterData)
+{
+	var skillResult = "";
+	for(treeid in skillMasterData){
+		skillResult += makeSkillParam(treeid,skillMasterData[treeid]);
+	}
+	return skillResult;
+}
+//GETパラメータ用の文字列取得
 function makeSkillParam(treeid, skillData)
 {
 	var skillString = "";
@@ -437,9 +446,13 @@ function updateLinks(linkTagNames, skillMasterData, userLevelTagName)
 		var targetID = linkTagNames[key];
 		var target = document.getElementById(targetID);
 		if(!target)continue;
+		var targetTreeID = target.getAttribute('treeid')
 		var skillResult = "";
-		for(treeid in skillMasterData){
-			skillResult += makeSkillParam(treeid,skillMasterData[treeid]);
+		if(targetTreeID==null||targetTreeID=="all"){
+			skillResult = makeAllSkillParam(skillMasterData);
+		}else{
+			var treeid = Number(targetTreeID);
+			skillResult = makeSkillParam(treeid,skillMasterData[treeid]);
 		}
 		var baseURL = target.href.substr(0,target.href.indexOf('?')+1);
 		var levelParam = (userLevel)?('&lv='+String(userLevel)):('');

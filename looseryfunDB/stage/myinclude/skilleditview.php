@@ -93,7 +93,8 @@ function echoSkillTree($skillid, $skillData,$skillMasterDataName){
 	echo '</span></span>';
 	echo '</h3></div>';
 	echo "<div class=\"skilltree\" treelevels=\"1\" id=\"tree$skillid\" style=\"display:none;height:$height;\">";
-	echo '<div>使用スキルポイント：<span id="skill_'.$skillid.'_total">0</span>pt</div>';
+	echo '<div>使用スキルポイント：<span id="skill_'.$skillid.'_total">0</span>pt';
+	echo '<span class="rightpos"><a treeid="'.$skillid.'" id="makeimage_'.$skillid.'" href="x/makeskillimage.php?" target="_blank">画像ファイル取得</a></span></div>';
 	echo '<div class="skillicons">';
 	echoBorderLines($skillData);
 	foreach($skillData['sub'] as $key=>$value){
