@@ -2,6 +2,7 @@
 	include_once 'myinclude/pageheader.php';
 	include_once 'myinclude/skilleditview.php';
 
+	$skillMaster = SkillMaster::getSkillList();
 	$skillRequest = @$_GET['s'];
 	$skillValues = null;
 	if($skillRequest)$skillValues = toSkillValues($skillRequest);
