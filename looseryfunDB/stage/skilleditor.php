@@ -26,7 +26,7 @@
 	<div id="showarea">
 <?php
 foreach($skillMaster as $key=>$value){
-	echoSkillTree($key,$value);
+	echoSkillTree($key,$value,'skillMaster');
 }
 ?>
 	</div>

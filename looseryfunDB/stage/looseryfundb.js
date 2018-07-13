@@ -261,9 +261,8 @@ function getSkillIdForSkillNumber(idName)
 	return Number(array[2]);
 }
 //スキルポイント統計
-function updateTotalSkillPoint(treeNumber)
+function updateTotalSkillPoint(treeNumber,skillMasterData)
 {
-	var skillMasterData = skillMaster;//from global
 	if(!skillMasterData)return;
 	var treeData = skillMasterData[treeNumber];
 	if(!treeData)return;
@@ -282,9 +281,8 @@ function updateTotalSkillPoint(treeNumber)
 	target.innerText = totalPoint;
 }
 //スキルポイント統計
-function updateAllTotalSkillPoint()
+function updateAllTotalSkillPoint(skillMasterData)
 {
-	var skillMasterData = skillMaster;//from global
 	if(!skillMasterData)return;
 	var allPoint = 0;
 	for(var treeNumber in skillMasterData){
@@ -311,7 +309,7 @@ function onUpRelative(source)
 	onUpRelative(target);
 }
 //スキルアップボタン
-function onUpSkill(self)
+function onUpSkill(self,skillMasterData)
 {
 	var targetID = self.getAttribute('target');
 	if(!targetID)return;
@@ -326,8 +324,8 @@ function onUpSkill(self)
 	}
 	var treeNumber = getSkillIdForTreeNumber(targetID);
 	if(treeNumber>0){
-		updateTotalSkillPoint(treeNumber);
-		updateAllTotalSkillPoint();
+		updateTotalSkillPoint(treeNumber,skillMasterData);
+		updateAllTotalSkillPoint(skillMasterData);
 	}
 	return; 
 }
@@ -345,8 +343,8 @@ function onDownSkill(self)
 	}
 	var treeNumber = getSkillIdForTreeNumber(targetID);
 	if(treeNumber>0){
-		updateTotalSkillPoint(treeNumber);
-		updateAllTotalSkillPoint();
+		updateTotalSkillPoint(treeNumber,skillMasterData);
+		updateAllTotalSkillPoint(skillMasterData);
 	}
 	return; 
 }
