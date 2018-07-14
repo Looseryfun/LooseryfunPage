@@ -11,7 +11,7 @@
 	define('JP_FONT','./HigashiOme-Gothic-1.3i.ttf');
 	define('NUM_FONT','/usr/share/fonts/dejavu/DejaVuSerif-Bold.ttf');
 	ini_set( 'display_errors', 0 );
-	
+
 	// 画像読み込み
 function loadImage($skillData){
 	$imgPath = '../'.urldecode($skillData['img']);
@@ -170,6 +170,7 @@ foreach($drawData as $skillID=>$data){
 	$y = $y+ICON_HEIGHT-ICON_HEIGHT/10;
 	drawCenterText($image,$name,$x,$y,18,JP_FONT);
 }
+drawCenterText($image,'(c)Toram Online',$imageWidth-100,$imageHeight-4,18,JP_FONT);
 
 	//exec("fc-list", $output);
 	//var_dump($output);
