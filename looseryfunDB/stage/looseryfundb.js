@@ -341,7 +341,7 @@ function onUpSkill(event,skillMasterData)
 }
 
 //スキルダウンボタン
-function onDownSkill(event)
+function onDownSkill(event,skillMasterData)
 {
 	var targetID = event.target.getAttribute('target');
 	if(!targetID)return;
