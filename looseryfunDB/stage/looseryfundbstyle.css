@@ -63,6 +63,19 @@ div.skillpanel {
     position: absolute;
     text-align: center;
 }
+div#showarea div.skillpanel span.skillname {
+    display: none;
+}
+div#showarea.showskillname div.skillpanel span.skillname {
+    display: inline;
+    pointer-events: none;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    color: #000000;
+    font-size: 9px;
+    background-color: rgba(255, 204, 177, 0.7);
+}
 div.skillpanel img.skillicon {
     width: 40px;
 }
