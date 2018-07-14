@@ -422,7 +422,7 @@ function makeAllSkillParam(skillMasterData)
 	return skillResult;
 }
 //GETパラメータ用の文字列取得
-function makeSkillParam(treeid, skillData)
+function makeSkillParam(treeid, skillData,force=false)
 {
 	var skillString = "";
 	for(skillid in skillData['sub']){
@@ -433,7 +433,7 @@ function makeSkillParam(treeid, skillData)
 		if(level<=0)continue;
 		skillString += toShortString(skillid)+toShortString(level);
 	}
-	if(skillString.length<=0)return "";
+	if(!force&&skillString.length<=0)return "";
 	return toShortString(treeid) + skillString + toShortString(0);
 }
 //リンクを更新(setintervalで呼び出し)
@@ -442,7 +442,7 @@ function updateLinks(linkTagNames, skillMasterData, userLevelTagName)
 	if(!linkTagNames || !skillMasterData)return;
 
     if (!('updated' in updateLinks)) {
-        updateLinks.updated = false;
+        updateLinks.updated = true;	//最初の一回は実行
 	}
 	if(!updateLinks.updated)return;
 	updateLinks.updated = false;
@@ -462,7 +462,7 @@ function updateLinks(linkTagNames, skillMasterData, userLevelTagName)
 			skillResult = makeAllSkillParam(skillMasterData);
 		}else{
 			var treeid = Number(targetTreeID);
-			skillResult = makeSkillParam(treeid,skillMasterData[treeid]);
+			skillResult = makeSkillParam(treeid,skillMasterData[treeid],true);
 		}
 		var baseURL = target.href.substr(0,target.href.indexOf('?')+1);
 		var levelParam = (userLevel)?('&lv='+String(userLevel)):('');
