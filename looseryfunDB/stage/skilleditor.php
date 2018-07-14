@@ -51,7 +51,7 @@
 	<div>
 		<ul class="list-1">
 			<li>スキルアイコンをタップするとレベルアップ、downをタップすると下げることができます。</li>
-			<li>画像はダウンロードしてご利用ください。加工も自由です。</li>
+			<li>画像はダウンロードしてご利用ください。加工も自由です。(スキルツリーの右上にあります)</li>
 			<li>トラブルは<a class="outlink" href="http://looseryfun.game-info.wiki/d/%ca%d4%bd%b8%b0%cd%cd%ea" rel="nofollow">ぽよんと</a>までお願いします。</li>
 		</ul>
 		<div><a id="alllink" treeid="all" href="skilleditor.php?">保存用URL</a>※長押しでURLをコピーすると現在の内容を保管できます。</div>

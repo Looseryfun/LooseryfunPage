@@ -13,6 +13,13 @@
 <div class="wiki-section-1"><div class="title-1"><h3>検索メニュー</h3></div>
 <div class="wiki-section-body-1">
 <ul class="list-1">
+<li><a href="skilleditor.php">スキルエディター</a></li>
+</ul>
+<div id="356283_block_3">
+<div class="toggle-title"><a class="toggle-link-open" id="region_plugin_DB_1" onclick="toggleRegion(this,'DB_block_1-inside');"><img width="17" height="17" alt="" src="http://static.seesaawiki.jp/formatter-storage/images/common/spacer.gif"></a><p>一覧</p></div>
+<div class="toggle-display" id="DB_block_1-inside" style="display:none">
+
+<ul class="list-2">
 <li><a href="armorimage.php">体防具画像一覧</a></li>
 <li><a href="equipimage.php?name=%E7%89%87%E6%89%8B%E5%89%A3">片手剣画像一覧</a></li>
 <li><a href="equipimage.php?name=%E4%B8%A1%E6%89%8B%E5%89%A3">両手剣画像一覧</a></li>
@@ -26,9 +33,6 @@
 <li><a href="equipimage.php?name=%E7%9B%BE">盾画像一覧</a></li>
 <li><a href="equipimage.php?name=%E8%BF%BD%E5%8A%A0%E8%A3%85%E5%82%99">追加装備画像一覧</a></li>
 </ul>
-<div id="356283_block_3">
-<div class="toggle-title"><a class="toggle-link-open" id="region_plugin_DB_1" onclick="toggleRegion(this,'DB_block_1-inside');"><img width="17" height="17" alt="" src="http://static.seesaawiki.jp/formatter-storage/images/common/spacer.gif"></a><p>一覧</p></div>
-<div class="toggle-display" id="DB_block_1-inside" style="display:none">
 <!--
 <ul class="list-1" id="356283_block_4">
 <li><a href="http://looseryfun.game-info.wiki/d/%b6%e2%ba%f6%be%f0%ca%f3">金策情報</a></li>
