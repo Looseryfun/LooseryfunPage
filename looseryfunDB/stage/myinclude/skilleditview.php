@@ -40,7 +40,7 @@ function echoBorderLine($base,$next){
 	echo "<div class=\"skillborder\" style=\"$style\" >";
 	echo '</div>';
 	}
-	function echoSubBorderLine($base,$next){
+function echoSubBorderLine($base,$next){
 	$xpos = ($base['x']+$next['x'])*SKILL_LAYOUT_X/2;
 	//$ypos = max($base['y'],$next['y'])*SKILL_LAYOUT_Y/2;
 
@@ -54,8 +54,8 @@ function echoBorderLine($base,$next){
 
 	$left = $xpos-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
 	$right = max($base['x'],$next['x'])*SKILL_LAYOUT_X+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
-	$top = max($base['y'],$next['y'])*SKILL_LAYOUT_Y-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
-	$bottom = max($base['y'],$next['y'])*SKILL_LAYOUT_Y+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
+	$top = $next['y']*SKILL_LAYOUT_Y-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
+	$bottom = $next['y']*SKILL_LAYOUT_Y+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
 
 	$style = 'left:'.$left.'px;top:'.$top.'px;width:'.($right-$left).'px;height:'.($bottom-$top).'px;';
 	echo "<div class=\"skillborder\" style=\"$style\" >";
