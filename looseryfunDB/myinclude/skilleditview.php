@@ -23,8 +23,11 @@ function echoSkill($treeid, $skillid, $skillData, $skillMasterDataName){
 
 	$style = "left: $x;top: $y;";
 	echo "<div class=\"skillpanel\" id=\"skill$skillid\" style=\"$style\">";
-	echo '<table class="clearbox">';
-	echo "<tr><td rowspan=\"2\" treelevel=\"$treelevel\"><img class=\"skillicon\" onclick=\"onUpSkill(arguments[0],$skillMasterDataName)\" target=\"$id\" src=\"$imgPath\" alt=\"$name\"></td>";
+	echo '<table class="clearbox" power="0">';
+	echo "<tr><td rowspan=\"2\" treelevel=\"$treelevel\">";
+	echo "<img class=\"skillicon\" onclick=\"onUpSkill(arguments[0],$skillMasterDataName)\" target=\"$id\" src=\"$imgPath\" alt=\"$name\">";
+	echo '<span class="skillname">'.$name.'</span>';
+	echo "</td>";
 	echo '<td><span id="'.$id.'" '.$before.' class="skilllevel">'.'0'.'</span></td></tr>';
 	echo '<tr><td>'.'<img class="downicon" onclick="onDownSkill(arguments[0],'.$skillMasterDataName.')" target="'.$id.'" src="img/down.png" alt="下げる">'.'</td>';
 	echo '</table>';
@@ -40,7 +43,7 @@ function echoBorderLine($base,$next){
 	echo "<div class=\"skillborder\" style=\"$style\" >";
 	echo '</div>';
 	}
-	function echoSubBorderLine($base,$next){
+function echoSubBorderLine($base,$next){
 	$xpos = ($base['x']+$next['x'])*SKILL_LAYOUT_X/2;
 	//$ypos = max($base['y'],$next['y'])*SKILL_LAYOUT_Y/2;
 
@@ -54,8 +57,8 @@ function echoBorderLine($base,$next){
 
 	$left = $xpos-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
 	$right = max($base['x'],$next['x'])*SKILL_LAYOUT_X+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_X);
-	$top = max($base['y'],$next['y'])*SKILL_LAYOUT_Y-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
-	$bottom = max($base['y'],$next['y'])*SKILL_LAYOUT_Y+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
+	$top = $next['y']*SKILL_LAYOUT_Y-(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
+	$bottom = $next['y']*SKILL_LAYOUT_Y+(SKILL_LINE_WIDTH/2)+(SKILL_ICON_Y);
 
 	$style = 'left:'.$left.'px;top:'.$top.'px;width:'.($right-$left).'px;height:'.($bottom-$top).'px;';
 	echo "<div class=\"skillborder\" style=\"$style\" >";
@@ -117,7 +120,6 @@ class SkillMaster{
 	}
 	// アイテム種別
 	public static function getSkillList(){
-		return SkillMaster::generateSkillData('skillMasterData');
 		$result=apcu_entry('skillMasterData','SkillMaster::generateSkillData',MASTER_CACHETIME);
 		return $result;
 	}

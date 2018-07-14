@@ -63,6 +63,19 @@ div.skillpanel {
     position: absolute;
     text-align: center;
 }
+div#showarea div.skillpanel span.skillname {
+    display: none;
+}
+div#showarea.showskillname div.skillpanel span.skillname {
+    display: inline;
+    pointer-events: none;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    color: #000000;
+    font-size: 9px;
+    background-color: rgba(255, 204, 177, 0.7);
+}
 div.skillpanel img.skillicon {
     width: 40px;
 }
@@ -78,6 +91,10 @@ div.skillicons table.clearbox {
 }
 h3 span.icon img {
     height: 27px;
+}
+div div.skillicons table[power="0"] td img.skillicon {
+    filter: grayscale(80%);
+    opacity: 0.7;
 }
 div.skilltree:not([treelevels*="1"]) div.skillicons table td[treelevel="1"] {
     background-image: url("img/batu.png");

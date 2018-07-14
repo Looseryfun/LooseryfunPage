@@ -304,8 +304,18 @@ function onUpRelative(source)
 	if(!target)return;
 	var oldValue = Number(target.innerText);
 	if(oldValue>=5)return;
-	target.innerText = 5;
+	setSkillLevel(target,5);
 	onUpRelative(target);
+}
+//スキルの数値設定
+function setSkillLevel(target,levelCount)
+{
+	target.innerText = levelCount;
+	while(target!=null&&target.tagName.toLowerCase()!='table'){
+		target = target.parentNode;
+	}
+	if(!target)return;
+	target.setAttribute('power',levelCount);
 }
 //スキルアップボタン
 function onUpSkill(event,skillMasterData)
@@ -316,10 +326,10 @@ function onUpSkill(event,skillMasterData)
 	if(!target)return;
 	var oldValue = Number(target.innerText);
 	if(oldValue==0){
-		target.innerText = oldValue+1;
+		setSkillLevel(target,oldValue+1);
 		onUpRelative(target);
 	}else if(oldValue<10){
-		target.innerText = oldValue+1;
+		setSkillLevel(target,oldValue+1);
 	}
 	var treeNumber = getSkillIdForTreeNumber(targetID);
 	if(treeNumber>0){
@@ -331,7 +341,7 @@ function onUpSkill(event,skillMasterData)
 }
 
 //スキルダウンボタン
-function onDownSkill(event)
+function onDownSkill(event,skillMasterData)
 {
 	var targetID = event.target.getAttribute('target');
 	if(!targetID)return;
@@ -339,7 +349,7 @@ function onDownSkill(event)
 	if(!target)return;
 	var oldValue = Number(target.innerText);
 	if(oldValue>0){
-		target.innerText = oldValue-1;
+		setSkillLevel(target,oldValue-1);
 	}
 	var treeNumber = getSkillIdForTreeNumber(targetID);
 	if(treeNumber>0){
@@ -393,7 +403,7 @@ function setAllSkillValues(skillValues, skillMasterData)
 			var skilllevelID = "skill_"+String(treeid)+"_"+String(skillid);
 			var skilllevelTag = document.getElementById(skilllevelID);
 			if(!skilllevelTag)continue;
-			skilllevelTag.innerText = level;
+			setSkillLevel(skilllevelTag,level);
 		}
 		updateTotalSkillPoint(treeid,skillMasterData);
 		var targetID = "treeshow_"+String(treeid);
@@ -412,7 +422,7 @@ function makeAllSkillParam(skillMasterData)
 	return skillResult;
 }
 //GETパラメータ用の文字列取得
-function makeSkillParam(treeid, skillData)
+function makeSkillParam(treeid, skillData,force=false)
 {
 	var skillString = "";
 	for(skillid in skillData['sub']){
@@ -423,7 +433,7 @@ function makeSkillParam(treeid, skillData)
 		if(level<=0)continue;
 		skillString += toShortString(skillid)+toShortString(level);
 	}
-	if(skillString.length<=0)return "";
+	if(!force&&skillString.length<=0)return "";
 	return toShortString(treeid) + skillString + toShortString(0);
 }
 //リンクを更新(setintervalで呼び出し)
@@ -432,7 +442,7 @@ function updateLinks(linkTagNames, skillMasterData, userLevelTagName)
 	if(!linkTagNames || !skillMasterData)return;
 
     if (!('updated' in updateLinks)) {
-        updateLinks.updated = false;
+        updateLinks.updated = true;	//最初の一回は実行
 	}
 	if(!updateLinks.updated)return;
 	updateLinks.updated = false;
@@ -452,7 +462,7 @@ function updateLinks(linkTagNames, skillMasterData, userLevelTagName)
 			skillResult = makeAllSkillParam(skillMasterData);
 		}else{
 			var treeid = Number(targetTreeID);
-			skillResult = makeSkillParam(treeid,skillMasterData[treeid]);
+			skillResult = makeSkillParam(treeid,skillMasterData[treeid],true);
 		}
 		var baseURL = target.href.substr(0,target.href.indexOf('?')+1);
 		var levelParam = (userLevel)?('&lv='+String(userLevel)):('');

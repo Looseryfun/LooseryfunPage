@@ -13,6 +13,13 @@
 <script type="text/javascript"> 
 	var skillMaster = <?php echo json_encode($skillMaster); ?>;
 	var skillValues = <?php echo json_encode($skillValues); ?>;
+	function chengeShowSkillName(event){
+		var target = document.getElementById('showarea');
+		if(!target)return;
+		var bool = event.target.checked;
+		if(bool)target.className = 'showskillname';
+		else target.className = '';
+	}
 	window.addEventListener('DOMContentLoaded',function(){
 		var target = document.getElementById('mylevel');
 		if(target){
@@ -34,7 +41,7 @@
 	var t = 0;
 	document.documentElement.addEventListener('touchend', function (e) {
 		var now = new Date().getTime();
-		if ((now - t) < 300){
+		if ((now - t) < 350){
 			e.preventDefault();
 		}
 		t = now;
@@ -44,11 +51,13 @@
 	<div>
 		<ul class="list-1">
 			<li>スキルアイコンをタップするとレベルアップ、downをタップすると下げることができます。</li>
+			<li>画像はダウンロードしてご利用ください。加工も自由です。(スキルツリーの右上にあります)</li>
 			<li>トラブルは<a class="outlink" href="http://looseryfun.game-info.wiki/d/%ca%d4%bd%b8%b0%cd%cd%ea" rel="nofollow">ぽよんと</a>までお願いします。</li>
 		</ul>
 		<div><a id="alllink" treeid="all" href="skilleditor.php?">保存用URL</a>※長押しでURLをコピーすると現在の内容を保管できます。</div>
 		<div>最大のキャラクターレベル<input id="mylevel" type="number" size="4" value="160" onkeyup="updateUserLevel(this.value,skillMaster)"></input>※スキルツリーの開放判定に使用されます</div>
 		<div>　</div>
+		<div><input type="checkbox" value="1" onchange="chengeShowSkillName(arguments[0])">スキル名を表示する</input></div>
 		<div class="title-3"><h5>総使用ポイント：<span id="skill_all_total">0</span>pt</h5></div>
 	</div>
 	<div id="showarea">
