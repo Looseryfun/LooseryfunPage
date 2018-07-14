@@ -120,7 +120,6 @@ class SkillMaster{
 	}
 	// アイテム種別
 	public static function getSkillList(){
-		return SkillMaster::generateSkillData('skillMasterData');
 		$result=apcu_entry('skillMasterData','SkillMaster::generateSkillData',MASTER_CACHETIME);
 		return $result;
 	}
