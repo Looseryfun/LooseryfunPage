@@ -379,6 +379,7 @@ function updateUserLevel(userlevel, skillMasterData)
 		}
 		target.setAttribute('treelevels',levels);
 	}
+	updateLinks.updated=true;
 	return;
 }
 function shortStringData()
