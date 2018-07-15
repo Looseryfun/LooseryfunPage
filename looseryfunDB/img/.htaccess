@@ -1,0 +1,3 @@
+<Files ~ ".(gif|jpe?g|png|ico)$">
+	Header set Cache-Control "max-age=86400, public"
+</Files>

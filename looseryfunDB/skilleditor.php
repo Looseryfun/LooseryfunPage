@@ -55,7 +55,7 @@
 			<li>トラブルは<a class="outlink" href="http://looseryfun.game-info.wiki/d/%ca%d4%bd%b8%b0%cd%cd%ea" rel="nofollow">ぽよんと</a>までお願いします。</li>
 		</ul>
 		<div><a id="alllink" treeid="all" href="skilleditor.php?">保存用URL</a>※長押しでURLをコピーすると現在の内容を保管できます。</div>
-		<div>最大のキャラクターレベル<input id="mylevel" type="number" size="4" value="160" onkeyup="updateUserLevel(this.value,skillMaster)"></input>※スキルツリーの開放判定に使用されます</div>
+		<div>最大のキャラクターレベル<input id="mylevel" type="number" size="4" value="160" onkeyup="updateUserLevel(this.value,skillMaster)"/>※スキルツリーの開放判定に使用されます</div>
 		<div>　</div>
 		<div><input type="checkbox" value="1" onchange="chengeShowSkillName(arguments[0])">スキル名を表示する</input></div>
 		<div class="title-3"><h5>総使用ポイント：<span id="skill_all_total">0</span>pt</h5></div>
