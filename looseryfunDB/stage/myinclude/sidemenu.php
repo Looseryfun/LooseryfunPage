@@ -33,6 +33,7 @@
 <li><a href="equipimage.php?name=%E7%9B%BE">盾画像一覧</a></li>
 <li><a href="equipimage.php?name=%E8%BF%BD%E5%8A%A0%E8%A3%85%E5%82%99">追加装備画像一覧</a></li>
 </ul>
+</ul>
 <!--
 <ul class="list-1" id="356283_block_4">
 <li><a href="http://looseryfun.game-info.wiki/d/%b6%e2%ba%f6%be%f0%ca%f3">金策情報</a></li>
@@ -43,6 +44,15 @@
 -->
 </div><!-- toggle-display -->
 </div><!-- 356283_block_3 -->
+<div class="wiki-section-2"><div class="title-1"><h3>外部サイト</h3></div>
+<ul class="list-3">
+<li>ストレイエの小道具箱<br/>
+	<a href="http://straye.html.xdomain.jp/exp.html" class="outlink" rel="nofollow">獲得経験値ランキング</a>
+</li>
+<li>田中の怠惰なトーラム攻略情報<br/>
+	<a href="http://ec2-18-179-170-142.ap-northeast-1.compute.amazonaws.com/ToramOnline/BukiProper" class="outlink" rel="nofollow">武器強化プロパ付与計算</a><br/>
+	<a href="http://ec2-18-179-170-142.ap-northeast-1.compute.amazonaws.com/ToramOnline/BouguProper" class="outlink" rel="nofollow">体防具強化プロパ付与計算</a>
+</li>
 </div><!-- wiki-section-body-1 -->
 </div><!-- wiki-section-1 -->
 </div><!-- /userarea -->
