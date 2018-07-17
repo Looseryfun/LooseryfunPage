@@ -1,50 +1,9 @@
 <?php
 	include_once 'myinclude/pageheader.php';
-
 	include_once 'myinclude/myfunctions.php';
-	
-	
-function generateArmorImg($url){
-	static $query = '//div[@id="main-content"]//h2';
-	static $queryText = 'span/text()';
-	static $queryInner = 'following-sibling::table[2]/tr/td/img';
-	$result = array();
-	$domDocument = new DOMDocument();
-	if( !@$domDocument->loadHTMLFile($url) )return $result;
-	
-	$xpath = new DOMXPath($domDocument);
-	// 入れ物を探す
-	$nodes = $xpath->query($query);
-	foreach($nodes as $node) {
-		$anker = $node->getAttribute('id');
-		$texts = $xpath->query($queryText,$node);
-		$itemName='';
-		foreach($texts as $text) {$itemName.=$domDocument->saveXML($text);}
-		// 画像取得
-		$innerDatas = $xpath->query($queryInner,$node);
-		$images = array();
-		foreach($innerDatas as $innerNode) {
-			array_push($images,$innerNode->getAttribute('src'));
-		}
-		// 順番を　軽　普通　重　に変える
-		$images = [@$images[1],@$images[0],@$images[2],@$images[4],@$images[3],@$images[5]];
-		$data = ['link'=>$url.'#'.$anker,'name'=>$itemName,'images'=>$images];
-		array_push($result,$data);
-	}
-	return $result;
-}
-function getArmorImg($url){
-	return apcu_entry($url, 'generateArmorImg', URL_CACHETIME);
-}
-	$urls=[
-		'https://www.dopr.net/toramonline-wiki/armor',
-		'https://www.dopr.net/toramonline-wiki/armorEX',
-	];
-	$allData = array();
-	foreach($urls as $url){
-		$newData = getArmorImg($url);
-		$allData = array_merge($allData,$newData);
-	}
+	include_once 'myinclude/wikireader.php';
+
+	$allData = getAllArmorImg();
 ?>
 <script type="text/javascript"> 
 window.addEventListener('DOMContentLoaded',function(){
