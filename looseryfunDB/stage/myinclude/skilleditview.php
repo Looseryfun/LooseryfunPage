@@ -25,7 +25,8 @@ function echoSkill($treeid, $skillid, $skillData, $skillMasterDataName){
 	echo "<div class=\"skillpanel\" id=\"skill$skillid\" style=\"$style\">";
 	echo '<table class="clearbox" power="0">';
 	echo "<tr><td rowspan=\"2\" treelevel=\"$treelevel\">";
-	echo "<img class=\"skillicon\" onclick=\"onUpSkill(arguments[0],$skillMasterDataName)\" target=\"$id\" src=\"$imgPath\" alt=\"$name\">";
+	//echo "<img class=\"skillicon\" onclick=\"onUpSkill(arguments[0],$skillMasterDataName)\" target=\"$id\" src=\"$imgPath\" alt=\"$name\">";
+	echo "<div class=\"skillicon\" onclick=\"onUpSkill(arguments[0],$skillMasterDataName)\" target=\"$id\" style=\"background-image:url($imgPath);background-size:40px;\"></div>";
 	echo '<span class="skillname">'.$name.'</span>';
 	echo "</td>";
 	echo '<td><span id="'.$id.'" '.$before.' class="skilllevel">'.'0'.'</span></td></tr>';

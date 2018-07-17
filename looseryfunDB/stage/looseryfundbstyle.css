@@ -79,6 +79,11 @@ div#showarea.showskillname div.skillpanel span.skillname {
 div.skillpanel img.skillicon {
     width: 40px;
 }
+div.skillpanel div.skillicon {
+    width: 40px;
+    height: 40px;
+    background-size: 40px;
+}
 div.skillpanel img.downicon {
     height: 25px;
 }
@@ -96,11 +101,19 @@ div div.skillicons table[power="0"] td img.skillicon {
     filter: grayscale(80%);
     opacity: 0.7;
 }
+div div.skillicons table[power="0"] td div.skillicon {
+    filter: grayscale(80%);
+    opacity: 0.7;
+}
 div.skilltree:not([treelevels*="1"]) div.skillicons table td[treelevel="1"] {
     background-image: url("img/batu.png");
     background-size: 100% 100%;
 }
 div.skilltree:not([treelevels*="1"]) div.skillicons table td[treelevel="1"] img.skillicon{
+    filter: sepia(50%);
+    opacity: 0.6;
+}
+div.skilltree:not([treelevels*="1"]) div.skillicons table td[treelevel="1"] div.skillicon{
     filter: sepia(50%);
     opacity: 0.6;
 }
@@ -112,6 +125,10 @@ div.skilltree:not([treelevels*="2"]) div.skillicons table td[treelevel="2"] img.
     filter: sepia(50%);
     opacity: 0.6;
 }
+div.skilltree:not([treelevels*="2"]) div.skillicons table td[treelevel="2"] div.skillicon{
+    filter: sepia(50%);
+    opacity: 0.6;
+}
 div.skilltree:not([treelevels*="3"]) div.skillicons table td[treelevel="3"] {
     background-image: url("img/batu.png");
     background-size: 100% 100%;
@@ -120,11 +137,19 @@ div.skilltree:not([treelevels*="3"]) div.skillicons table td[treelevel="3"] img.
     filter: sepia(50%);
     opacity: 0.6;
 }
+div.skilltree:not([treelevels*="3"]) div.skillicons table td[treelevel="3"] div.skillicon{
+    filter: sepia(50%);
+    opacity: 0.6;
+}
 div.skilltree:not([treelevels*="4"]) div.skillicons table td[treelevel="4"] {
     background-image: url("img/batu.png");
     background-size: 100% 100%;
 }
 div.skilltree:not([treelevels*="4"]) div.skillicons table td[treelevel="4"] img.skillicon{
+    filter: sepia(50%);
+    opacity: 0.6;
+}
+div.skilltree:not([treelevels*="4"]) div.skillicons table td[treelevel="4"] div.skillicon{
     filter: sepia(50%);
     opacity: 0.6;
 }
