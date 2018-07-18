@@ -108,4 +108,72 @@ function getEquipImgByName($typename){
 	}
 	return $allData;
 }
+function getNormalItem($url){
+	static $query = '//div[@id="main-content"]//table//th';
+	static $queryInner = '../following-sibling::tr[1]//td';
+	static $queryInner2 = '../following-sibling::tr[2]//td[1]';
+	$result = array();
+	$domDocument = new DOMDocument();
+	if( !@$domDocument->loadHTMLFile($url) )return $result;
+	
+	$xpath = new DOMXPath($domDocument);
+	// 入れ物を探す
+	$result = array();
+	$nodes = $xpath->query($query);
+	foreach($nodes as $node) {
+		$itemName = $node->textContent;
+		if($itemName=='アイテム名')continue;
+		// 分解ポイントと価格取得
+		$breakAndPrice = $xpath->query($queryInner,$node);
+		$break = @$breakAndPrice[0];
+		$breakType = $breakPoint = null;
+		if($break){
+			$break = $break->textContent;
+			$pregs = preg_split('/([0-9]+)/',$break,null,PREG_SPLIT_DELIM_CAPTURE);
+			$breakType = @$pregs[0];
+			$breakPoint = @$pregs[1];
+		}
+		$price = @$breakAndPrice[1];
+		if($price){
+			$price = $price->textContent;
+			$pregs = preg_split('/([0-9]+)/',$price,null,PREG_SPLIT_DELIM_CAPTURE);
+			$price = @$pregs[1];
+		}
+		// 説明取得
+		$helptexts = $xpath->query($queryInner2,$node);
+		$helpNode = @$helptexts[0];
+		$helptext = '';
+		if($helpNode){
+			$helptext = $helpNode->textContent;
+			//$helptext = str_replace(array("\t","\r\n","\n","\r"), "", $helptext);
+			preg_match('/消費アイテム[\(（](.+?)[\)）]/',$helptext,$pregs);
+			$helptext = trim(@$pregs[1]);
+			$limited = $helpNode->textContent;
+			$limited = (preg_match('/限定/',$limited,$pregs))?(1):(0);
+		}
+		array_push($result,array($itemName,$breakType,$breakPoint,$price,$helptext,$limited));
+	}
+	return $result;
+}
+function getAllNormalItem(){
+	$urls=[
+		'https://www.dopr.net/toramonline-wiki/item_material',
+		'https://www.dopr.net/toramonline-wiki/item_material02',
+		'https://www.dopr.net/toramonline-wiki/item_material03',
+		'https://www.dopr.net/toramonline-wiki/item_material04',
+		'https://www.dopr.net/toramonline-wiki/item_material05',
+		'https://www.dopr.net/toramonline-wiki/item_material05',
+		'https://www.dopr.net/toramonline-wiki/item_material06',
+		'https://www.dopr.net/toramonline-wiki/item_material07',
+		'https://www.dopr.net/toramonline-wiki/item_material08',
+		'https://www.dopr.net/toramonline-wiki/item_material09',
+		'https://www.dopr.net/toramonline-wiki/item_material10',
+	];
+	$allData = array();
+	foreach($urls as $url){
+		$newData = getNormalItem($url);
+		$allData = array_merge($allData,$newData);
+	}
+	return $allData;
+}
 ?>
