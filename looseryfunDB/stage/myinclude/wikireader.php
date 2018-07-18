@@ -176,4 +176,92 @@ function getAllNormalItem(){
 	}
 	return $allData;
 }
+
+function searchEquipData(&$result,$innerNode){
+	if(!$innerNode)return;
+	if($innerNode->firstChild->tagName=='th'){
+		$thText = $innerNode->firstChild->textContent;
+		if(strpos($thText,'基礎')!==false){
+			$result['power']=preg_replace('/[^0-9]/', '', $innerNode->firstChild->nextSibling->textContent);
+			return;
+		}
+		if(strpos($thText,'安定率')!==false){
+			$result['stability']=preg_replace('/[^0-9]/', '', $innerNode->firstChild->nextSibling->textContent);
+			return;
+		}
+		if(strpos($thText,'素材')!==false){
+			$nextNode = $innerNode->nextSibling; //tr
+			$materials = array();
+			while($nextNode){
+				$tdText = $nextNode->firstChild->textContent;
+				$pregs = preg_split('/([0-9]+)/',$tdText,null,PREG_SPLIT_DELIM_CAPTURE);
+				array_push($materials,$pregs);
+				$nextNode = $nextNode->nextSibling;
+			}
+			$result['material']=$materials;
+			return;
+		}
+		if(strpos($thText,'品')!==false&&$thText!='スミス品'){
+			$trNode = $innerNode->nextSibling; //tr
+			while($trNode&&$trNode->firstChild->tagName!='td'){
+				$trNode = $trNode->nextSibling;
+			}
+			if(!$trNode)return;
+			$textNode = $trNode->firstChild->firstChild;
+			$propertys = array();
+			while($textNode){
+				if($textNode instanceof DOMText){
+					if($textNode->textContent=='-')return;//存在しない
+					if(strpos($textNode->textContent,'効果なし')===false){
+						array_push($propertys,$textNode->textContent);
+					}
+				}
+				$textNode = $textNode->nextSibling;
+			}
+			$result['property'][$thText]=$propertys;
+			return;
+		}
+	}
+	
+}
+function getEquipData($url){
+	static $query = '//div[@id="main-content"]//h2';
+	static $queryText = 'span/text()';
+	static $queryInner = 'following-sibling::table[1]//table//tr';
+	$result = array();
+	$domDocument = new DOMDocument();
+	if( !@$domDocument->loadHTMLFile($url) )return $result;
+	
+	$xpath = new DOMXPath($domDocument);
+	// 入れ物を探す
+	$nodes = $xpath->query($query);
+	$limited = 0;
+	foreach($nodes as $node) {
+		$texts = $xpath->query($queryText,$node);
+		$itemName='';
+		foreach($texts as $text) {$itemName.=$domDocument->saveXML($text);}
+		if(strpos($itemName,'▼▼')!==false){
+			$limited = 1;//期間限定表示
+			continue;
+		}
+		// データ取得
+		$innerDatas = $xpath->query($queryInner,$node);
+		$itemData = ['name'=>$itemName,'limited'=>$limited];
+		foreach($innerDatas as $innerNode) {
+			searchEquipData($itemData,$innerNode);
+		}
+		array_push($result,$itemData);
+	}
+	return $result;
+}
+function getAllEquipData(){
+	$urls=[
+	];
+	$allData = array();
+	foreach($urls as $url){
+		$newData = getEquipData($url);
+		$allData = array_merge($allData,$newData);
+	}
+	return $allData;
+}
 ?>
