@@ -194,11 +194,13 @@ function searchEquipData(&$result,$innerNode){
 			$materials = array();
 			while($nextNode){
 				$tdText = $nextNode->firstChild->textContent;
-				$pregs = preg_split('/([0-9]+)/',$tdText,null,PREG_SPLIT_DELIM_CAPTURE);
-				array_push($materials,$pregs);
+				if($tdText!='-'){
+					$pregs = preg_split('/([0-9]+)/',$tdText,null,PREG_SPLIT_DELIM_CAPTURE);
+					array_push($materials,$pregs);
+				}
 				$nextNode = $nextNode->nextSibling;
 			}
-			$result['material']=$materials;
+			if(count($materials)>0)$result['material']=$materials;
 			return;
 		}
 		if(strpos($thText,'品')!==false&&$thText!='スミス品'){
@@ -213,7 +215,9 @@ function searchEquipData(&$result,$innerNode){
 				if($textNode instanceof DOMText){
 					if($textNode->textContent=='-')return;//存在しない
 					if(strpos($textNode->textContent,'効果なし')===false){
-						array_push($propertys,$textNode->textContent);
+						//array_push($propertys,$textNode->textContent);
+						$preg = preg_split('/([\+\-])/',$textNode->textContent,null,PREG_SPLIT_DELIM_CAPTURE);
+						array_push($propertys,$preg);
 					}
 				}
 				$textNode = $textNode->nextSibling;
@@ -253,15 +257,5 @@ function getEquipData($url){
 		array_push($result,$itemData);
 	}
 	return $result;
-}
-function getAllEquipData(){
-	$urls=[
-	];
-	$allData = array();
-	foreach($urls as $url){
-		$newData = getEquipData($url);
-		$allData = array_merge($allData,$newData);
-	}
-	return $allData;
 }
 ?>

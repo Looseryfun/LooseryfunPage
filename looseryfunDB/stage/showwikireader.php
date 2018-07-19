@@ -25,7 +25,7 @@ foreach($result as $row){
 		echo implode(',', $item)."\n";
 		if(!$propertys)continue;
 		foreach($propertys as $property){
-			echo 'property,'.$droptype.','. $property."\n";
+			echo 'property,'.$droptype.','.implode(',',$property)."\n";
 		}
 	}
 	foreach($row['material'] as $material){
