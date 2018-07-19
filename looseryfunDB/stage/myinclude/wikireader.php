@@ -216,7 +216,7 @@ function searchEquipData(&$result,$innerNode){
 					if($textNode->textContent=='-')return;//存在しない
 					if(strpos($textNode->textContent,'効果なし')===false){
 						//array_push($propertys,$textNode->textContent);
-						$preg = preg_split('/([\+\-])/',$textNode->textContent,null,PREG_SPLIT_DELIM_CAPTURE);
+						$preg = preg_split('/([-+][\d]*)(\%?)/',$textNode->textContent,null,PREG_SPLIT_DELIM_CAPTURE);
 						array_push($propertys,$preg);
 					}
 				}
