@@ -194,7 +194,7 @@ function searchEquipData(&$result,$innerNode){
 			$materials = array();
 			while($nextNode){
 				$tdText = $nextNode->firstChild->textContent;
-				if($tdText!='-'){
+				if($tdText!='-'&&$tdText!='素材'){
 					$pregs = preg_split('/([0-9]+)/',$tdText,null,PREG_SPLIT_DELIM_CAPTURE);
 					array_push($materials,$pregs);
 				}

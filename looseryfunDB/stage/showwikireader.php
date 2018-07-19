@@ -28,8 +28,10 @@ foreach($result as $row){
 			echo 'property,'.$droptype.','.implode(',',$property)."\n";
 		}
 	}
-	foreach($row['material'] as $material){
-		echo 'material,'.implode(',', $material)."\n";
+	if(isset($row['material'])){
+		foreach($row['material'] as $material){
+			echo 'material,'.implode(',', $material)."\n";
+		}
 	}
 }
 	?>
