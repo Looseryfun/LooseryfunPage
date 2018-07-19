@@ -162,7 +162,6 @@ function getAllNormalItem(){
 		'https://www.dopr.net/toramonline-wiki/item_material03',
 		'https://www.dopr.net/toramonline-wiki/item_material04',
 		'https://www.dopr.net/toramonline-wiki/item_material05',
-		'https://www.dopr.net/toramonline-wiki/item_material05',
 		'https://www.dopr.net/toramonline-wiki/item_material06',
 		'https://www.dopr.net/toramonline-wiki/item_material07',
 		'https://www.dopr.net/toramonline-wiki/item_material08',
