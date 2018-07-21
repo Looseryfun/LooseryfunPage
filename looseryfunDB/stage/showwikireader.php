@@ -5,7 +5,7 @@
 	<div class="title-1"><h3 id="content_2">てす</h3></div>
 	<div>
 	<?php
-		$result = getEquipData('https://www.dopr.net/toramonline-wiki/onehandsword');
+		$result = getAllEquipData();
 	?>
 <pre>
 <code>
@@ -20,9 +20,9 @@ foreach($result as $row){
 		// ウッドソード等
 		$row['property']['鍛冶屋品']=array();
 	}
+	$item = ['item',@$row['name'],@$row['limited'],@$row['power'],@$row['stability']];
+	echo implode(',', $item)."\n";
 	foreach($row['property'] as $droptype=>$propertys){
-		$item = ['item',$droptype,@$row['name'],@$row['limited'],@$row['power'],@$row['stability']];
-		echo implode(',', $item)."\n";
 		if(!$propertys)continue;
 		foreach($propertys as $property){
 			echo 'property,'.$droptype.','.implode(',',$property)."\n";
