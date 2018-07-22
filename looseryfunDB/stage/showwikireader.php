@@ -5,7 +5,7 @@
 	<div class="title-1"><h3 id="content_2">てす</h3></div>
 	<div>
 	<?php
-		$result = getAllEquipData();
+		$result = getAllCrystaData();
 	?>
 <pre>
 <code>
@@ -15,7 +15,7 @@
 	echo implode(',', $row)."\n";
 }*/
 // echo wepon
-foreach($result as $row){
+/*foreach($result as $row){
 	if(!isset($row['property'])){
 		// ウッドソード等
 		$row['property']['鍛冶屋品']=array();
@@ -32,6 +32,15 @@ foreach($result as $row){
 		foreach($row['material'] as $material){
 			echo 'material,'.implode(',', $material)."\n";
 		}
+	}
+}*/
+// echo crysta
+foreach($result as $row){
+	$item = ['item',@$row['name'],@$row['subtype'],@$row['limited'],@$row['notrade'],@$row['extra']];
+	echo implode(',', $item)."\n";
+	foreach($row['property'] as $number=>$propertys){
+		if(!$propertys)continue;
+		echo 'property,'.implode(',',$propertys)."\n";
 	}
 }
 	?>

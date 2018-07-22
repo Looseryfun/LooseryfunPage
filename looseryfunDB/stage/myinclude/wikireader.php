@@ -271,4 +271,86 @@ function getAllEquipData(){
 	}
 	return $allData;
 }
+function searchCrystaData(&$result,$Alltext){
+	if(!$Alltext || strlen($Alltext)<=0)return;
+	if(strpos($Alltext,'トレード不可')!==false){
+		$result['notrade']=1;
+		return;
+	}
+	if(strpos($Alltext,'限定品')!==false){
+		$result['limited']=1;
+		return;
+	}
+	$base = preg_split('/：|；/',$Alltext,null,PREG_SPLIT_DELIM_CAPTURE);
+
+	switch($base[0]){
+		case '部位':
+			if(strpos($base[1],'全')!==false){$result['subtype']='ノーマル';}
+			else if(strpos($base[1],'武器')!==false){$result['subtype']='ウエポン';}
+			else if(strpos($base[1],'体')!==false){$result['subtype']='アーマー';}
+			else if(strpos($base[1],'追加')!==false){$result['subtype']='オプション';}
+			else if(strpos($base[1],'特殊')!==false){$result['subtype']='アクセサリー';}
+		break;
+		case '強化するクリスタ':case '上書きするクリスタ':
+			$result['extra']=str_replace('◇','',$base[1]);
+		break;
+		case '効果':
+			$propertys = explode('、',$base[1]);
+			foreach($propertys as $key=>$value){
+				$preg = preg_split('/([-+][\d]*)(\%?)/',$value,null,PREG_SPLIT_DELIM_CAPTURE);
+				if(count($preg)==1){
+					$preg=preg_split('/\ |　/',$value);
+					//$preg=explode('　',$preg[0]);
+					if(strpos($preg[1],'%')!==false){
+						$preg[1] = str_replace('%','',$preg[1]);
+						$preg[2] = "%";
+					}
+				}
+				$propertys[$key]=$preg;
+			}
+			$result['property']=$propertys;
+		break;
+	}
+}
+function getCrystaData($url){
+	static $query = '//div[@id="main-content"]//h3';
+	static $queryText = 'span/span/text()';
+	$result = array();
+	$domDocument = new DOMDocument();
+	if( !@$domDocument->loadHTMLFile($url) )return $result;
+	
+	$xpath = new DOMXPath($domDocument);
+	// 入れ物を探す
+	$nodes = $xpath->query($query);
+	foreach($nodes as $node) {
+		$texts = $xpath->query($queryText,$node);
+		$itemName='';
+		foreach($texts as $text) {$itemName.=$domDocument->saveXML($text);}
+		$itemName = str_replace('◇','',$itemName);
+		// データ取得
+		$itemData = ['name'=>$itemName,'limited'=>0,'notrade'=>0,'extra'=>null];
+		$innnerText = "";
+		$next = $node->nextSibling;
+		while($next) {
+			if($next instanceof DOMElement){
+				if($next->tagName=='h3')break;
+				if($next->tagName=='br'){
+					searchCrystaData($itemData,$innnerText);
+					$innnerText='';
+				}else{
+					$innnerText.=$next->textContent;
+				}
+			}else if($next instanceof DOMText){
+				$innnerText.=$next->wholeText;
+			}
+			$next = $next->nextSibling;
+		}
+		array_push($result,$itemData);
+	}
+	return $result;
+}
+function getAllCrystaData(){
+	$allData = getCrystaData('https://www.dopr.net/toramonline-wiki/item_crystal');
+	return $allData;
+}
 ?>
