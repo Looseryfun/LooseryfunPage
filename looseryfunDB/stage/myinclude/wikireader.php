@@ -230,7 +230,7 @@ function searchEquipData(&$result,$innerNode){
 	}
 	
 }
-function getEquipData($url){
+function getEquipData($url,$subtype=null){
 	static $query = '//div[@id="main-content"]//h2';
 	static $queryText = 'span/text()';
 	static $queryInner = 'following-sibling::table[1]//table//tr';
@@ -253,6 +253,7 @@ function getEquipData($url){
 		// データ取得
 		$innerDatas = $xpath->query($queryInner,$node);
 		$itemData = ['name'=>$itemName,'limited'=>$limited];
+		if(isset($subtype))$itemData['subtype']=$subtype;
 		foreach($innerDatas as $innerNode) {
 			searchEquipData($itemData,$innerNode);
 		}
@@ -263,9 +264,9 @@ function getEquipData($url){
 function getAllEquipData(){
 	$allurls = getAllEquipURLs();
 	$allData = array();
-	foreach($allurls as $urls){
+	foreach($allurls as $subtype=>$urls){
 		foreach($urls as $url){
-			$newData = getEquipData($url);
+			$newData = getEquipData($url,$subtype);
 			$allData = array_merge($allData,$newData);
 		}
 	}
