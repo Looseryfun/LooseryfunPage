@@ -229,6 +229,13 @@ function searchEquipData(&$result,$innerNode){
 					if(strpos($textNode->textContent,'効果なし')===false){
 						//array_push($propertys,$textNode->textContent);
 						$preg = preg_split('/([-+][\d]*)(\%?)/',$textNode->textContent,null,PREG_SPLIT_DELIM_CAPTURE);
+						if(count($preg)==1){
+							$preg=preg_split('/\ |　/',$textNode->textContent);
+							if(strpos($preg[1],'%')!==false){
+								$preg[1] = str_replace('%','',$preg[1]);
+								$preg[2] = "%";
+							}
+						}
 						array_push($propertys,$preg);
 					}
 				}
