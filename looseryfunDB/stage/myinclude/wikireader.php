@@ -1,5 +1,5 @@
 <?php
-function getAllEquipURLs(){
+function getAllImgEquipURLs(){
 	$allurls = array();
 	$allurls['片手剣'] = ['https://www.dopr.net/toramonline-wiki/onehandsword'];
 	$allurls['両手剣'] = ['https://www.dopr.net/toramonline-wiki/bothhandsword'];
@@ -21,6 +21,19 @@ function getAllEquipURLs(){
 		'https://www.dopr.net/toramonline-wiki/selectsEX',
 		];
 	return $allurls;
+}
+function getAllEquipURLs(){
+	$allurls = getAllImgEquipURLs();
+	$allurls['矢'] = ['https://www.dopr.net/toramonline-wiki/arrow'];
+	$allurls['ナイフ'] = ['https://www.dopr.net/toramonline-wiki/knife'];
+	return $allurls;
+}
+function getAllArmorURLs(){
+	$urls=[
+		'https://www.dopr.net/toramonline-wiki/armor',
+		'https://www.dopr.net/toramonline-wiki/armorEX',
+	];
+	return $urls;
 }
 function generateArmorImg($url){
 	static $query = '//div[@id="main-content"]//h2';
@@ -55,10 +68,7 @@ function getArmorImg($url){
 	return apcu_entry($url, 'generateArmorImg', URL_CACHETIME);
 }
 function getAllArmorImg(){
-	$urls=[
-		'https://www.dopr.net/toramonline-wiki/armor',
-		'https://www.dopr.net/toramonline-wiki/armorEX',
-	];
+	$urls=getAllArmorURLs();
 	$allData = array();
 	foreach($urls as $url){
 		$newData = getArmorImg($url);
@@ -100,7 +110,7 @@ function getEquipImg($url){
 	return apcu_entry($url, 'generateEquipImg', URL_CACHETIME);
 }
 function getEquipImgByName($typename){
-	$allurls = getAllEquipURLs();
+	$allurls = getAllImgEquipURLs();
 	$urls = @$allurls[$typename];
 	if(!$urls)return null;
 
@@ -269,6 +279,15 @@ function getAllEquipData(){
 			$newData = getEquipData($url,$subtype);
 			$allData = array_merge($allData,$newData);
 		}
+	}
+	return $allData;
+}
+function getAllArmorData(){
+	$allurls = getAllArmorURLs();
+	$allData = array();
+	foreach($allurls as $url){
+		$newData = getEquipData($url,'体防具');
+		$allData = array_merge($allData,$newData);
 	}
 	return $allData;
 }

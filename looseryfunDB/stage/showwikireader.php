@@ -5,7 +5,7 @@
 	<div class="title-1"><h3 id="content_2">てす</h3></div>
 	<div>
 	<?php
-		$result = getAllEquipData();
+		$result = getAllArmorData();
 	?>
 <pre>
 <code>
