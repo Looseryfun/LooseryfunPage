@@ -25,7 +25,7 @@ function getAllImgEquipURLs(){
 function getAllEquipURLs(){
 	$allurls = getAllImgEquipURLs();
 	$allurls['矢'] = ['https://www.dopr.net/toramonline-wiki/arrow'];
-	$allurls['ナイフ'] = ['https://www.dopr.net/toramonline-wiki/knife'];
+	$allurls['短剣'] = ['https://www.dopr.net/toramonline-wiki/knife'];
 	return $allurls;
 }
 function getAllArmorURLs(){
