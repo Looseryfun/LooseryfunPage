@@ -1,5 +1,6 @@
 # Invisbily proxy to a third party API
 /db/*  http://looseryfun.s1006.xrea.com/:splat     200
+/ssdb/*  https://ss1.xrea.com/looseryfun.s1006.xrea.com/:splat     200
 
 
 # Redirect with a 301
