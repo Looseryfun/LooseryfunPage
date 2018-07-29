@@ -16,7 +16,7 @@
 <li><a href="skilleditor.php">スキルエディター</a></li>
 </ul>
 <div id="356283_block_3">
-<div class="toggle-title"><a class="toggle-link-open" id="region_plugin_DB_1" onclick="toggleRegion(this,'DB_block_1-inside');"><img width="17" height="17" alt="" src="http://static.seesaawiki.jp/formatter-storage/images/common/spacer.gif"></a><p>一覧</p></div>
+<div class="toggle-title"><a class="toggle-link-open" id="region_plugin_DB_1" onclick="toggleRegion(this,'DB_block_1-inside');"><img width="17" height="17" alt="" src="https://static.seesaawiki.jp/formatter-storage/images/common/spacer.gif"></a><p>一覧</p></div>
 <div class="toggle-display" id="DB_block_1-inside" style="display:none">
 
 <ul class="list-2">
