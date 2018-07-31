@@ -131,6 +131,9 @@ function generateHtmlData($key){
 	foreach($nodes as $node) {
 	    // DOMツリーを保存
 	    $line = trim($domDocument->saveXML($node));
+	    $line = str_replace('http://static.seesaawiki.jp/','https://static.seesaawiki.jp/',$line);
+	    $line = str_replace('http://image01.seesaawiki.jp/','https://image01.seesaawiki.jp/',$line);
+	    $line = str_replace('http://image02.seesaawiki.jp/','https://image02.seesaawiki.jp/',$line);
 	    if (! empty($line)) {
 	        $src[] = $line;
 	    }
