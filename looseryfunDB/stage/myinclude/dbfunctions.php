@@ -21,7 +21,8 @@ function connectDB(){
 	if(isset($pdo))return;
 try {
 	$pdo = new PDO('mysql:host=localhost;dbname=looseryfun;charset=utf8','looseryfun','looseryJiro3fun',
-	array(PDO::ATTR_EMULATE_PREPARES => false));
+		array(PDO::ATTR_EMULATE_PREPARES => false));
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
 	exit('データベース接続失敗。'.$e->getMessage());
 }
@@ -61,6 +62,11 @@ function getDBErrorString(){
 	if(!isset($errInfo))return "";
 	if(!isset($errInfo[1])||$errInfo[1]==0)return "";
 	return implode(':',$errInfo);
+}
+
+function dumpPrepareParams(){
+	global $pdo,$lastStatement,$lastSQL;
+	if($lastStatement)$lastStatement->debugDumpParams();
 }
 
 /**

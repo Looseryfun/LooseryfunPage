@@ -1,0 +1,52 @@
+﻿/* ようそこ */
+div#welcome div.welcome_default {
+	display: none;
+}
+div#welcome div.welcome_granted {
+	display: none;
+}
+div#welcome div.welcome_denied {
+	display: none;
+}
+div#welcome.welcome_default div.welcome_default {
+	display: block;
+}
+div#welcome.welcome_default div.welcome_granted {
+	display: block;
+}
+div#welcome.welcome_granted div.welcome_granted {
+	display: block;
+}
+div#welcome.welcome_denied div.welcome_denied {
+	display: block;
+}
+
+/* テーブル */
+div.user-area table.manager_message{
+    width: 80%;
+    margin-left: 5%;
+    /*margin-left: auto;
+    margin-right: auto;*/
+}
+div.user-area table.guildmanager_entryform {
+    width: 80%;
+    margin-left: 5%;
+}
+div.user-area table.guildmanager_entryform th{
+    white-space: nowrap;
+    width: 10px;
+}
+
+div.user-area table.guildmanager_entryform input[type="text"]{
+    width: 80%;
+}
+div.user-area table td a.edit:before {
+    content: "";
+    margin: 0 4px 0 0;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(img/鍛冶屋.png);
+    background-size: contain;
+    vertical-align: bottom;
+}

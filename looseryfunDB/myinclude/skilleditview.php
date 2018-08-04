@@ -1,6 +1,6 @@
 <?php
 
-define('SKILL_CACHETIME',6*60*60);
+define('SKILL_CACHETIME',24*60*60);
 
 define('SKILL_ICON_X',20);
 define('SKILL_ICON_Y',20);
@@ -121,7 +121,7 @@ class SkillMaster{
 	}
 	// アイテム種別
 	public static function getSkillList(){
-		$result=apcu_entry('skillMasterData','SkillMaster::generateSkillData',MASTER_CACHETIME);
+		$result=apcu_entry('skillMasterData','SkillMaster::generateSkillData',SKILL_CACHETIME);
 		return $result;
 	}
 	protected static function generateSkillData($key){

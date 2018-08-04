@@ -16,7 +16,7 @@
 <li><a href="skilleditor.php">スキルエディター</a></li>
 </ul>
 <div id="356283_block_3">
-<div class="toggle-title"><a class="toggle-link-open" id="region_plugin_DB_1" onclick="toggleRegion(this,'DB_block_1-inside');"><img width="17" height="17" alt="" src="http://static.seesaawiki.jp/formatter-storage/images/common/spacer.gif"></a><p>一覧</p></div>
+<div class="toggle-title"><a class="toggle-link-open" id="region_plugin_DB_1" onclick="toggleRegion(this,'DB_block_1-inside');"><img width="17" height="17" alt="" src="https://static.seesaawiki.jp/formatter-storage/images/common/spacer.gif"></a><p>一覧</p></div>
 <div class="toggle-display" id="DB_block_1-inside" style="display:none">
 
 <ul class="list-2">
@@ -32,7 +32,6 @@
 <li><a href="equipimage.php?name=%E6%8A%9C%E5%88%80%E5%89%A3">抜刀剣画像一覧</a></li>
 <li><a href="equipimage.php?name=%E7%9B%BE">盾画像一覧</a></li>
 <li><a href="equipimage.php?name=%E8%BF%BD%E5%8A%A0%E8%A3%85%E5%82%99">追加装備画像一覧</a></li>
-</ul>
 </ul>
 <!--
 <ul class="list-1" id="356283_block_4">
@@ -52,6 +51,8 @@
 <li>装備強化プロパ付与計算など<br/>
 	<a href="http://ec2-18-179-170-142.ap-northeast-1.compute.amazonaws.com/ToramOnline/" class="outlink" rel="nofollow">田中の怠惰なトーラム攻略</a>
 </li>
+</ul>
+</div>
 </div><!-- wiki-section-body-1 -->
 </div><!-- wiki-section-1 -->
 </div><!-- /userarea -->

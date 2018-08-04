@@ -471,3 +471,46 @@ function updateLinks(linkTagNames, skillMasterData, userLevelTagName)
 	}
 	return;
 }
+
+// 内部読み込み
+function ajaxload(target,url,getparam,postparam,myButton,callback)
+{
+	var xmlHttpRequest = new XMLHttpRequest();
+	xmlHttpRequest.onreadystatechange = function()
+	{
+		var HTTP_STATUS_OK = 200;
+		if( this.readyState == XMLHttpRequest.DONE
+		&& this.status == HTTP_STATUS_OK )
+		{
+			// レスポンスの表示
+			if(typeof target==='string')target=document.getElementById(target);
+			if(!target){
+				console.log('target not found.');
+				return;
+			}
+			target.innerHTML = this.responseText;
+			if(callback)callback();
+		}
+	}
+	var method = 'GET';
+	if(postparam!==undefined)method='POST';
+	var urlParams = new URLSearchParams();
+	if(getparam)for(var key in getparam){
+		urlParams.set(key,getparam[key]);
+	}
+	var index = url.indexOf('?');
+	if(index<0)index=url.length;
+	url = url.substr(0,index);
+	xmlHttpRequest.open(method, url+'?'+urlParams.toString());
+	xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	var postdata = new URLSearchParams();
+	if(postparam)for(var key in postparam){
+		postdata.set(key,postparam[key]);
+	}
+	xmlHttpRequest.send( postdata.toString() );
+
+	if(typeof myButton==='string')myButton=document.getElementById(myButton);
+	if(myButton){
+		myButton.disable = "true";
+	}
+}
