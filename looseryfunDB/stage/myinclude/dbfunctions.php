@@ -13,6 +13,7 @@ define('GETFROM_LIMITED', 3);
 $pdo=null;
 $lastStatement=null;
 $lastSQL=null;
+$transactionCount=0;
 /**
  * DB接続
  */
@@ -31,25 +32,34 @@ try {
  * トランザクション開始
  */
 function beginTransaction(){
-	global $pdo,$lastStatement;
+	global $pdo,$lastStatement,$transactionCount;
 	connectDB();
-	$pdo->beginTransaction();
+	if($transactionCount==0){
+		$pdo->beginTransaction();
+	}
+	$transactionCount++;
 }
 /**
  * トランザクションコミット
  */
 function commitTransaction(){
-	global $pdo,$lastStatement;
+	global $pdo,$lastStatement,$transactionCount;
 	connectDB();
-	$pdo->commit();
+	$transactionCount--;
+	if($transactionCount==0){
+		$pdo->commit();
+	}
 }
 /**
  * トランザクションロールバック
  */
 function rollbackTransaction(){
-	global $pdo,$lastStatement;
+	global $pdo,$lastStatement,$transactionCount;
 	connectDB();
-	$pdo->rollBack();
+	$transactionCount--;
+	if($transactionCount==0){
+		$pdo->rollBack();
+	}
 }
 /**
  * エラー文章取得

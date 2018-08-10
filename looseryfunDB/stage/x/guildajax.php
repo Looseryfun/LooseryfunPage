@@ -10,7 +10,6 @@
 		$includefile = 'myinclude/guild/'.$command.'.php';
 		///public_html/stage/myinclude/guild
 		if(!@include_once($includefile)){
-			var_dump($command);
 			echo '<div>アクセスできません</div>';
 		}
 	}
@@ -19,5 +18,9 @@
 	}catch(GoHomeException $e){
 		$params['home_message'] = $e->getMessage();
 		includeCommand('home',$params);
+	}catch(GuildErrorMessage $e){
+		$params['home_message'] = $e->getMessage();
+		includeCommand('home',$params);
 	}
+}
 ?>

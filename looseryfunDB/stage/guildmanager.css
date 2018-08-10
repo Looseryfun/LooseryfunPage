@@ -49,4 +49,6 @@ div.user-area table td a.edit:before {
     background: url(img/ハンマー.png);
     background-size: contain;
     vertical-align: bottom;
+    background-color: rgba(255, 101, 60, 0.3);
+	text-decoration: none;
 }
