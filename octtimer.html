@@ -21,7 +21,7 @@
 			<script>
 					var time = new Date(2018,8-1,9,23,0,0);
 					var now = new  Date();
-					for(;time.getTime()<now.getTime();time.setHours(time.getHours()+5)){}
+					for(;time.getTime()<now.getTime(); time.setHours(time.getHours()+5)){}
 					document.write("次の出現時間<br/>");
 					document.write((time.getMonth()+1)+"月"+time.getDate()+"日　"+time.getHours()+"時");
 					time.setHours(time.getHours()+5);
