@@ -44,6 +44,13 @@ class GuildMember{
 		$_SESSION['guild']['id']=$memberid;
 		return $memberid;
 	}
+	public static function getMemberIdByToken($hextoken){
+		$token = @hexdec($hextoken);
+		$sql = "SELECT id FROM `guild_member` WHERE token=?";
+		$ids = getIDs($sql,array($token));
+		if(!$ids||count($ids)<=0)return 0;
+		return $ids[0];
+	}
 	public static function createNewMember($name,$playerid){
 		beginTransaction();
 		$result = GuildMember::_createNewMember($name,$playerid);
@@ -179,9 +186,14 @@ class GuildGuild{
 		'token',
 	);
 	public static function checkGuildName($name,$keyword){
+		$guildid = GuildGuild::getGuildIdByName($name,$keyword);
+		return ($guildid>0);
+	}
+	public static function getGuildIdByName($name,$keyword){
 		$sql = 'SELECT id FROM `guild_data` WHERE `name`=:name AND `keyword`=:keyword';
 		$ids = getIDs($sql,array('name'=>$name,'keyword'=>$keyword));
-		return !empty($ids);
+		if(empty($ids))return 0;
+		return @$ids[0];
 	}
 	public static function createNewGuild($name,$keyword,$ownerid){
 		if(empty($name))throw new GuildErrorException('name not defined.');
@@ -203,6 +215,21 @@ class GuildGuild{
 		GuildMessage::guildToOwner('ギルドを設立しました','ギルドの「編集」で追加の設定を行えます。',$id);
 		GuildMember::updateGuild($id,$ownerid,false);
 		return $id;
+	}
+	public static function updateData($guildId,$name,$keyword,$icon_url,$publicinfo){
+		if($guildId<=0)throw new GuildErrorException('guildId not defined.');
+		if(empty($name))throw new GuildErrorException('name not defined.');
+		if($keyword===null)$keyword='';
+		if($icon_url===null)$icon_url='';
+		if($publicinfo===null)$publicinfo='';
+		beginTransaction();
+		$sql = 'UPDATE `guild_data` SET `name`=:name,`keyword`=:keyword,`icon_url`=:icon_url,`publicinfo`=:publicinfo WHERE id=:guildId';
+		$params = array('guildId'=>$guildId,'name'=>$name,'keyword'=>$keyword,'icon_url'=>$icon_url,'publicinfo'=>$publicinfo);
+		$result = execSQL($sql,$params);
+		GuildGuild::deleteApc($guildId);
+		if($result)commitTransaction();
+		else rollbackTransaction();
+		return $result;
 	}
 	public static function getPlayers($guilds){
 		if(!$guilds)return array();
@@ -304,12 +331,19 @@ class GuildMessage{
 		if(!is_array($toGuilds))$toGuilds = array($toGuilds);
 		$sql="INSERT INTO `guild_messageto` (`messageid`, `guildid`) VALUES (:messageid,:guildid)";
 		foreach($toGuilds as $guildid){
-			execSQL($sql,array('messageid'=>$messageId,'guildid'=>$toGuilds));
+			execSQL($sql,array('messageid'=>$messageId,'guildid'=>$guildid));
 		}
 	}
 	private static function getToGuilds($messageId){
 		if(!$messageId)return;
 		return getIDs("SELECT guildid FROM `guild_messageto` WHERE messageid=?",array($messageId));
+	}
+	public function getMessages($memberid){
+		if($memberid<=0)return array();
+		$guildid = GuildMember::getGuildId($memberid);
+		if($guildid==0)$guildid = -1;
+		$sql = "SELECT id FROM `guild_message` LEFT OUTER JOIN `guild_messageto` ON guild_message.id=guild_messageto.messageid WHERE guild_message.touser=:memberid OR guild_messageto.guildid=:guildid GROUP BY guild_message.id ORDER BY guild_message.sendtime DESC";
+		return getIDs($sql,array('memberid'=>$memberid,'guildid'=>$guildid));
 	}
 	protected static function makeApcKey($messageid){
 		return 'guild_message_'.$messageid;

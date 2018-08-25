@@ -12,7 +12,7 @@
 		return true;
 	};
 	if (!("Notification" in window)) {
-        alert("ブラウザが未対応です");
+        //alert("ブラウザが未対応です");
     }
 	var OneSignal = window.OneSignal || [];
 	OneSignal.push(function() {
@@ -23,7 +23,6 @@
 	//window.onerror = guidShowError;
 	window.addEventListener('error', guidShowError);
 </script>
-	<!--<div class="title-1"><h3>ギルドマネージャ</h3></div>-->
 	<div id="ajaxarea" class="guildmanager">
 <?php
 	include 'x/guildajax.php';

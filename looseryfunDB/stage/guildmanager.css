@@ -40,6 +40,10 @@ div.user-area table.guildmanager_entryform th{
 div.user-area table.guildmanager_entryform input[type="text"]{
     width: 80%;
 }
+div.user-area table.guildmanager_entryform textarea{
+    width: 80%;
+    height: 48px;
+}
 div.user-area table td a.edit:before {
     content: "";
     margin: 0 4px 0 0;
