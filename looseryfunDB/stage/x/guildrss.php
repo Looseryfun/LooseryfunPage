@@ -20,6 +20,7 @@ try{
 	$Feed->setLink('http://looseryfun.netlify.com');
 	$Feed->setDescription('ギルドマネージャの通知用RSSです。');
 
+	$messageids = array_slice($messageids,0,20);
 	foreach($messageids as $id){
 		$message = GuildMessage::getData($id);
 		if(!$message)continue;
