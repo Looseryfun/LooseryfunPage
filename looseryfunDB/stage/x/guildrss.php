@@ -34,8 +34,6 @@ try{
 		
 		$Feed->addItem($item);
 	}
-	$Feed->addItem($itemOne);
-
 	$Feed->printFeed();
 }catch(FeedWriter\InvalidOperationException $e){
 	throw $e;
