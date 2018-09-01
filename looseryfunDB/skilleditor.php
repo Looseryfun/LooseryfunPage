@@ -1,4 +1,5 @@
 <?php
+	$html_title='スキルエディター';
 	include_once 'myinclude/pageheader.php';
 	include_once 'myinclude/skilleditview.php';
 
