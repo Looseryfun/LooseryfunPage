@@ -35,12 +35,12 @@ function setSelectboxData(targetID, masterData)
 function onMainItemTypeChaned(event)
 {
 	var mainTypeObj = event.target;
-	if(!mainTypeObj.subid)return;
+	var subid = mainTypeObj.getAttribute('subid');
+	if(!subid)return;
 	// サブセレクトリストを更新
-	var subTypeName = mainTypeObj.subid;
 	var subTypeData = mainTypeObj.masterData[mainTypeObj.value]['sub'];
 	
-	setSubItemTypeList(subTypeName,subTypeData);
+	setSubItemTypeList(subid,subTypeData);
 	return; 
 }
 
@@ -65,6 +65,7 @@ function setItemTypeList(targetID, itemMasterData)
 	if(!target)return;
 	
 	target.addEventListener('change',onMainItemTypeChaned);
+	triggerEvent(target,'change');
 	return; 
 }
 
