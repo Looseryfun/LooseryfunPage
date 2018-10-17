@@ -44,6 +44,7 @@ function getScenarioURLs(){
 		'https://www.dopr.net/toramonline-wiki/scenario1_05',
 		'https://www.dopr.net/toramonline-wiki/scenario1_06',
 		'https://www.dopr.net/toramonline-wiki/scenario1_07',
+		'https://www.dopr.net/toramonline-wiki/scenario1_08',
 	];
 	return $urls;
 }
